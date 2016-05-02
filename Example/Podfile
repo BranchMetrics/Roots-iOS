@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Roots-iOS-SDK_Example', :exclusive => true do
+  pod 'Roots-iOS-SDK', :path => '../'
+end
+
+target 'Roots-iOS-SDK_Tests', :exclusive => true do
+  pod 'Roots-iOS-SDK', :path => '../'
+
+  
+end
