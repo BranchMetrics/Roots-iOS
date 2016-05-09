@@ -7,7 +7,12 @@
 //
 
 @import UIKit;
+#import "Roots.h"
 
-@interface RootsViewController : UIViewController
+@interface RootsViewController : UIViewController <RootsEventsDelegate> {
+    NSMutableData *_responseData;
+}
+@property (weak, nonatomic) IBOutlet UITextField *navUrlTxt;
+@property (weak, nonatomic) IBOutlet UISwitch *AppStoreSwitch;
 
 @end
