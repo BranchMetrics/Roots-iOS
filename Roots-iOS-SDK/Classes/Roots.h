@@ -12,6 +12,7 @@
 
 #endif /* Roots_h */
 #import "RootsFinder.h"
+#import "RootsLinkOptions.h"
 
 @protocol RootsEventsDelegate <NSObject>
 
@@ -23,6 +24,8 @@
 
 @interface Roots : NSObject
 
-+(void) connect:(NSString *)url userAgent:(NSString *) userAgent andWithDelegate:(id) callback;
++ (void) connect:(NSString *)url withCallback:(id)callback;
++ (void) connect:(NSString *)url withCallback:(id)callback andWithOptions:(RootsLinkOptions *)options;
++ (void) debugConnect:(NSString *)url applinkMetadataJsonArray:(NSString *)applinkData andCallback:(id)callback;
 
 @end

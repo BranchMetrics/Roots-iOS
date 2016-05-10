@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "69F9D9E38F159972E2317FC68CEF9FEA5787CCB3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "26D7508DFD536695B09641A80633E631613A3A0B" : 0,
+    "69F9D9E38F159972E2317FC68CEF9FEA5787CCB3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8458D899-C567-40A2-AA5D-005F4F589498",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "26D7508DFD536695B09641A80633E631613A3A0B" : "Branch-Exchange-iOS-SDK\/",
+    "69F9D9E38F159972E2317FC68CEF9FEA5787CCB3" : "Roots-iOS-SDK\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Roots-iOS-SDK",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/Roots-iOS-SDK.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BranchMetrics\/Branch-Exchange-iOS-SDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "26D7508DFD536695B09641A80633E631613A3A0B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/BranchMetrics\/Roots-iOS-SDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "69F9D9E38F159972E2317FC68CEF9FEA5787CCB3"
+    }
+  ]
+}

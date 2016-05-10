@@ -25,11 +25,26 @@
 
 static Roots *roots;
 
-+(void) connect:(NSString *)url userAgent:(NSString *) userAgent andWithDelegate:(id) callback {
++ (void) connect:(NSString *)url withCallback:(id)callback andWithOptions:(RootsLinkOptions *)options {
     roots = [[Roots alloc]init];
     roots.rootsFinder = [[RootsFinder alloc] init];
-    [roots.rootsFinder findAndFollowRoots:url withUserAgent:userAgent withDelegate:callback];
+    [roots.rootsFinder findAndFollowRoots:url withDelegate:callback andOptions:options];
 }
+
++ (void) connect:(NSString *)url withCallback:(id)callback {
+    RootsLinkOptions *options = [[RootsLinkOptions alloc] init];
+    [self connect:url withCallback:callback andWithOptions:options];
+}
+
++ (void) debugConnect:(NSString *)url applinkMetadataJsonArray:(NSString *)applinkData andCallback:(id)callback {
+    NSError *error = nil;
+    NSArray *appLinkMetadataArray = [NSJSONSerialization JSONObjectWithData:[applinkData dataUsingEncoding:NSUTF8StringEncoding]
+                                                                    options:0
+                                                                      error:&error];
+    AppLaunchConfig *appLaunchConfig = [AppLaunchConfig initialize:appLinkMetadataArray withUrl:url];
+    [AppRouter handleAppRouting:appLaunchConfig withDelegate:callback];
+}
+
 
 @end
 

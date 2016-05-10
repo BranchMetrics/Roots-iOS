@@ -19,6 +19,7 @@
  Callback for Root finder events
  */
 @property (nonatomic, assign) id  <RootsEventsDelegate> rootsEventCallback;
+@property (nonatomic, strong) RootsLinkOptions *options;
 
 /**
  Uri to find roots
@@ -33,7 +34,7 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.webView = [[UIWebView alloc] init];
+        _webView = [[UIWebView alloc] init];
     }
     return self;
 }
@@ -56,11 +57,12 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 "  return JSON.stringify(results);"
 "})()";
 
-- (void) findAndFollowRoots:(NSString *)url withUserAgent:(NSString *) userAgent withDelegate:(id)callback{
-    self.rootsEventCallback = callback;
+- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback andOptions:(RootsLinkOptions *)options{
+    _rootsEventCallback = callback;
+    _options = options;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Get the final redirected URL content
-        URLContent *urlContent = [self getUrlContent:url withUserAgent:userAgent];
+        URLContent *urlContent = [self getUrlContent:url];
         dispatch_async(dispatch_get_main_queue(), ^(void){
             // Extract the Applink content by JS injection
             [self scrapeAppLinkContent:urlContent];
@@ -68,8 +70,8 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     });
 }
 
-- (URLContent *) getUrlContent:(NSString *)url withUserAgent:(NSString *) userAgent {
-    self.actualUri = url;
+- (URLContent *) getUrlContent:(NSString *)url {
+    _actualUri = url;
     NSString *redirectedUrl = url;
     URLContent *urlContent = [[URLContent alloc] init];
     NSURLResponse *response = nil;
@@ -78,8 +80,9 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     while(redirectedUrl){
         NSMutableURLRequest  * urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
         [urlRequest setValue:@"al" forHTTPHeaderField:@"Prefer-Html-Meta-Tags"];
-        [urlRequest setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-        
+        if ([_options getUserAgent]) {
+            [urlRequest setValue:[_options getUserAgent] forHTTPHeaderField:@"User-Agent"];
+        }
         NSError * error = nil;
         contentData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
         if (error == nil)
@@ -108,9 +111,9 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 - (void) scrapeAppLinkContent:(URLContent *)urlContent {
     UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
     [window addSubview:self.webView];
-    self.webView.delegate = self;
-    self.webView.hidden = YES;
-    [self.webView loadData:urlContent.htmlSource
+    _webView.delegate = self;
+    _webView.hidden = YES;
+    [_webView loadData:urlContent.htmlSource
                   MIMEType:urlContent.contentType
           textEncodingName:urlContent.contentEncoding
                    baseURL:[NSURL URLWithString:@""]];
@@ -123,16 +126,19 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 
 - (void)ExtractAppLuanchConfigUsingJavaScript:(UIWebView *)webView {
     AppLaunchConfig *appLaunchConfig = [[AppLaunchConfig alloc]init];
-    appLaunchConfig.actualUri = self.actualUri;
-    appLaunchConfig.targetAppFallbackUrl = self.actualUri;
+    appLaunchConfig.actualUri = _actualUri;
+    appLaunchConfig.targetAppFallbackUrl = _actualUri;
     
     NSString *jsonString = [webView stringByEvaluatingJavaScriptFromString:METADATA_READ_JAVASCRIPT];
     NSError *error = nil;
     NSArray *appLinkMetadataArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
                                                                     options:0
                                                                       error:&error];
-    appLaunchConfig = [AppLaunchConfig initialize:appLinkMetadataArray withUrl:self.actualUri];   
-    [AppRouter handleAppRouting:appLaunchConfig withDelegate:self.rootsEventCallback];
+    appLaunchConfig = [AppLaunchConfig initialize:appLinkMetadataArray withUrl:_actualUri];
+    if ([_options isUserOverridingFallbackRule]) {
+        appLaunchConfig.alwaysOpenAppStore =  [_options getAlwaysFallbackToAppStore];
+    }
+    [AppRouter handleAppRouting:appLaunchConfig withDelegate:_rootsEventCallback];
 }
 
 @end

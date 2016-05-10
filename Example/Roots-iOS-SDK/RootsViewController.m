@@ -28,12 +28,17 @@
     
 }
 - (IBAction)navigateBtn:(id)sender {
-    [self.navUrlTxt text];
-    
-    NSString *url = @"https://soundcloud.com/tacobell";
-    NSString * userAgentStr = @"Mozilla/5.0 (iPad; CPU OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53";
-   [Roots connect:url userAgent:userAgentStr andWithDelegate:self];
-    
+    if (_navUrlTxt.text && _navUrlTxt.text.length > 0) {
+        RootsLinkOptions *options = [[RootsLinkOptions alloc]init];
+        [options setAlwaysFallbackToAppStore:self.AppStoreSwitch.isOn];
+        [Roots connect:_navUrlTxt.text withCallback:self andWithOptions:options];
+    }
+    else {
+        NSString *debugAppLinkMetadataJson = @"[{\"property\":\"al:ios:app_name\",\"content\":\"RootsTestBed\"},{\"property\":\"al:ios:app_store_id\",\"content\":\"336353151\"},{\"property\":\"al:ios:url\",\"content\":\"myscheme://mypath/user/my_user_id1234/my_username\"},{\"property\":\"al:web:should_fallback\",\"content\":\"false\"}]";
+        [Roots debugConnect:@"https://my_awesome_site.com/user/my_user_id123456"
+                applinkMetadataJsonArray:debugAppLinkMetadataJson
+                andCallback:self];
+    }
 }
 
 - (void)applicationLaunched:(NSString *)appName appStoreID:(NSString *)appStoreID {
@@ -41,7 +46,7 @@
 }
 
 - (void)fallbackUrlOpened:(NSString *)fallbackUrl {
-     NSLog(@"Roots_AppLinker: fallbackUrlOpened %@", fallbackUrl);
+    NSLog(@"Roots_AppLinker: fallbackUrlOpened %@", fallbackUrl);
 }
 
 - (void)appStoreOpened:(NSString *)appName appStoreID:(NSString *)appStoreID {
