@@ -11,11 +11,12 @@
 #import "RootsFinder.h"
 #import "AppRouter.h"
 
-@interface Roots()
+@interface Roots() <RootFinderStateDelegate>
 /**
  * Root finder instnece for finding and following app roots for the given url.
  */
 @property (nonatomic, strong) RootsFinder *rootsFinder;
+@property (nonatomic, strong) NSMutableArray *rootsFinderArray;
 
 @end
 
@@ -26,9 +27,9 @@ static Roots *roots;
 //TODO: PRS need to add an array of RootFinderObject here and make Roots Singelton inorder to allow concurrent connect calls
 
 + (void) connect:(NSString *)url withDelegate:(id)callback andWithOptions:(RootsLinkOptions *)options {
-    roots = [[Roots alloc]init];
-    roots.rootsFinder = [[RootsFinder alloc] init];
-    [roots.rootsFinder findAndFollowRoots:url withDelegate:callback andOptions:options];
+    RootsFinder *rootsFinder = [[RootsFinder alloc] init];
+    [[Roots getInstance].rootsFinderArray addObject:rootsFinder];
+    [rootsFinder findAndFollowRoots:url withDelegate:callback withStateDelegate:[Roots getInstance] andOptions:options];
 }
 
 + (void) connect:(NSString *)url withDelegate:(id)callback {
@@ -43,6 +44,27 @@ static Roots *roots;
                                                                       error:&error];
     AppLaunchConfig *appLaunchConfig = [AppLaunchConfig initialize:appLinkMetadataArray withUrl:url];
     [AppRouter handleAppRouting:appLaunchConfig withDelegate:callback];
+}
+
++ (Roots *) getInstance {
+    if (!roots) {
+        roots = [[Roots alloc]init];
+    }
+    return roots;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.rootsFinderArray = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+
+- (void) onRootFinderFinished:(RootsFinder *)rootFinder {
+    [[Roots getInstance].rootsFinderArray removeObject:rootFinder];
 }
 
 

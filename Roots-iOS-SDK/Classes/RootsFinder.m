@@ -19,6 +19,7 @@
  * Callback for Root finder events
  */
 @property (nonatomic, assign) id<RootsEventsDelegate> rootsEventCallback;
+@property (nonatomic, assign) id<RootFinderStateDelegate> rootFinderStateCallback;
 @property (nonatomic, strong) RootsLinkOptions *options;
 
 /**
@@ -61,8 +62,9 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 "  return JSON.stringify(results);"
 "})()";
 
-- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback andOptions:(RootsLinkOptions *)options {
+- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback withStateDelegate:(id)stateCallback andOptions:(RootsLinkOptions *)options {
     _rootsEventCallback = callback;
+    _rootFinderStateCallback = stateCallback;
     _options = options;
     
     if ([self isValidURL:url]) {
@@ -150,6 +152,10 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
         appLaunchConfig.alwaysOpenAppStore =  [_options getAlwaysFallbackToAppStore];
     }
     [AppRouter handleAppRouting:appLaunchConfig withDelegate:_rootsEventCallback];
+    
+    if (_rootFinderStateCallback) {
+        [ _rootFinderStateCallback onRootFinderFinished:self];
+    }
 }
 
 - (BOOL) isValidURL:(NSString *)url {
@@ -169,6 +175,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     }
     return isValid;
 }
-             
+
+            
 
 @end
