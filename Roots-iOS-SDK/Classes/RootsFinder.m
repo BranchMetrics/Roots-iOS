@@ -64,14 +64,22 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 - (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback andOptions:(RootsLinkOptions *)options {
     _rootsEventCallback = callback;
     _options = options;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Get the final redirected URL content
-        URLContent *urlContent = [self getUrlContent:url];
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            // Extract the Applink content by JS injection
-            [self scrapeAppLinkContent:urlContent];
+    
+    if ([self isValidURL:url]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // Get the final redirected URL content
+            URLContent *urlContent = [self getUrlContent:url];
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                // Extract the Applink content by JS injection
+                [self scrapeAppLinkContent:urlContent];
+            });
         });
-    });
+    }
+    else {
+        if (callback) {
+           [callback rootsError:invalid_url];
+        }
+    }
 }
 
 - (URLContent *) getUrlContent:(NSString *)url {
@@ -143,5 +151,24 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     }
     [AppRouter handleAppRouting:appLaunchConfig withDelegate:_rootsEventCallback];
 }
+
+- (BOOL) isValidURL:(NSString *)url {
+    BOOL isValid = NO;
+    NSUInteger length = [url length];
+    if (length > 0) {
+        NSError *error = nil;
+        NSDataDetector *dataDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:&error];
+        if (dataDetector && !error) {
+            NSRange range = NSMakeRange(0, length);
+            NSRange notFoundRange = (NSRange){NSNotFound, 0};
+            NSRange linkRange = [dataDetector rangeOfFirstMatchInString:url options:0 range:range];
+            if (!NSEqualRanges(notFoundRange, linkRange) && NSEqualRanges(range, linkRange)) {
+                isValid = YES;
+            }
+        }
+    }
+    return isValid;
+}
+             
 
 @end

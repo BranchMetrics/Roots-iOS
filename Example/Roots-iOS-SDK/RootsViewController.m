@@ -53,6 +53,14 @@
     NSLog(@"Roots_AppLinker: appStoreOpened %@  %@", appName, appStoreID);
 }
 
+- (void) rootsError:(enum RootsError)error {
+    if (error == invalid_url) {
+        NSLog(@"Roots_AppLinker: rootsError invalid url");
+    }
+    else {
+        NSLog(@"Roots_AppLinker: rootsError %d", error);
+    }
+}
 
 
 

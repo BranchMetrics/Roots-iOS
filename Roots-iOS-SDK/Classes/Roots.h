@@ -8,13 +8,21 @@
 #import "RootsFinder.h"
 #import "RootsLinkOptions.h"
 
+enum RootsError {
+    unknown_error,
+    invalid_url    
+};
+
+
 @protocol RootsEventsDelegate <NSObject>
 
 - (void) applicationLaunched:(NSString *)appName appStoreID:(NSString *)appStoreID;
 - (void) fallbackUrlOpened:(NSString *)fallbackUrl;
 - (void) appStoreOpened:(NSString *)appName appStoreID:(NSString *)appStoreID;
+- (void) rootsError:(enum RootsError)error;
 
 @end
+
 
 @interface Roots : NSObject
 
