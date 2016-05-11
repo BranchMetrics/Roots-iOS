@@ -19,7 +19,7 @@
 
 @implementation RootsLinkOptions
 
-- (void) setUserAgent:(NSString *) userAgent {
+- (void) setUserAgent:(NSString *)userAgent {
     _userAgent = userAgent;
 }
 

@@ -13,27 +13,25 @@
 
 @interface Roots()
 /**
- Delegate for Roots events
+ * Root finder instnece for finding and following app roots for the given url.
  */
 @property (nonatomic, strong) RootsFinder *rootsFinder;
 
 @end
 
-
-
 @implementation Roots
 
 static Roots *roots;
 
-+ (void) connect:(NSString *)url withCallback:(id)callback andWithOptions:(RootsLinkOptions *)options {
++ (void) connect:(NSString *)url withDelegate:(id)callback andWithOptions:(RootsLinkOptions *)options {
     roots = [[Roots alloc]init];
     roots.rootsFinder = [[RootsFinder alloc] init];
     [roots.rootsFinder findAndFollowRoots:url withDelegate:callback andOptions:options];
 }
 
-+ (void) connect:(NSString *)url withCallback:(id)callback {
++ (void) connect:(NSString *)url withDelegate:(id)callback {
     RootsLinkOptions *options = [[RootsLinkOptions alloc] init];
-    [self connect:url withCallback:callback andWithOptions:options];
+    [self connect:url withDelegate:callback andWithOptions:options];
 }
 
 + (void) debugConnect:(NSString *)url applinkMetadataJsonArray:(NSString *)applinkData andCallback:(id)callback {

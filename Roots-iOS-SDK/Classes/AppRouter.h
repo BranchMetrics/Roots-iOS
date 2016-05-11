@@ -6,14 +6,11 @@
 //
 //
 
-#ifndef AppRouter_h
-#define AppRouter_h
-
-
-#endif /* AppRouter_h */
-
 @interface AppRouter : NSObject
 
-+ (BOOL)handleAppRouting:(AppLaunchConfig *)appLaunchConfig withDelegate:(id)callback;
+/*
+ * Method for handling routing to app or to fallback options based on the app launch configuration
+ */
++ (BOOL) handleAppRouting:(AppLaunchConfig *)appLaunchConfig withDelegate:(id)callback;
 
 @end

@@ -6,11 +6,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-#import "URLContent.h"
-
 @implementation URLContent
-
-
 
 @end

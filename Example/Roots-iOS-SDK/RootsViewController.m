@@ -31,7 +31,7 @@
     if (_navUrlTxt.text && _navUrlTxt.text.length > 0) {
         RootsLinkOptions *options = [[RootsLinkOptions alloc]init];
         [options setAlwaysFallbackToAppStore:self.AppStoreSwitch.isOn];
-        [Roots connect:_navUrlTxt.text withCallback:self andWithOptions:options];
+        [Roots connect:_navUrlTxt.text withDelegate:self andWithOptions:options];
     }
     else {
         NSString *debugAppLinkMetadataJson = @"[{\"property\":\"al:ios:app_name\",\"content\":\"RootsTestBed\"},{\"property\":\"al:ios:app_store_id\",\"content\":\"336353151\"},{\"property\":\"al:ios:url\",\"content\":\"myscheme://mypath/user/my_user_id1234/my_username\"},{\"property\":\"al:web:should_fallback\",\"content\":\"false\"}]";

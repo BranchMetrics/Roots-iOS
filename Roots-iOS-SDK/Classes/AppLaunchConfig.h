@@ -5,16 +5,7 @@
 //  Created by Sojan P.R. on 5/3/16.
 //
 //
-
-#ifndef AppLaunchConfig_h
-#define AppLaunchConfig_h
-
-
-#endif /* AppLaunchConfig_h */
-
-
 @interface AppLaunchConfig : NSObject
-
 
 @property (strong, nonatomic) NSString *actualUri;
 @property (strong, nonatomic) NSString *targetUri;
@@ -29,7 +20,14 @@
 @property (nonatomic) BOOL alwaysOpenAppStore;
 @property (nonatomic) NSInteger const PORT_UNDEFINED;
 
-+ (AppLaunchConfig *)initialize:(NSArray *) applinkMetadataArray withUrl:(NSString *) Uri;
-- (BOOL)isLaunchSchemeAvailable;
+/*
+ * Create and return an AppLaunchConfig instace from the given App Link meta data
+ */
++ (AppLaunchConfig *) initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url;
+
+/*
+ * Check if this Launch Config contains a scheme to launch the app.
+ */
+- (BOOL) isLaunchSchemeAvailable;
 
 @end

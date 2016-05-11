@@ -16,22 +16,26 @@
 @interface RootsFinder ()
 
 /**
- Callback for Root finder events
+ * Callback for Root finder events
  */
-@property (nonatomic, assign) id  <RootsEventsDelegate> rootsEventCallback;
+@property (nonatomic, assign) id<RootsEventsDelegate> rootsEventCallback;
 @property (nonatomic, strong) RootsLinkOptions *options;
 
 /**
  Uri to find roots
  */
 @property (strong, nonatomic) NSString *actualUri;
+
+/**
+ * Web view to extract the App links
+ */
 @property (strong, nonatomic) UIWebView *webView;
 
 @end
 
 @implementation RootsFinder
 
-- (instancetype)init{
+- (instancetype) init {
     self = [super init];
     if (self) {
         _webView = [[UIWebView alloc] init];
@@ -57,7 +61,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 "  return JSON.stringify(results);"
 "})()";
 
-- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback andOptions:(RootsLinkOptions *)options{
+- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback andOptions:(RootsLinkOptions *)options {
     _rootsEventCallback = callback;
     _options = options;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -77,7 +81,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     NSURLResponse *response = nil;
     NSData *contentData = nil;
     
-    while(redirectedUrl){
+    while (redirectedUrl) {
         NSMutableURLRequest  * urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
         [urlRequest setValue:@"al" forHTTPHeaderField:@"Prefer-Html-Meta-Tags"];
         if ([_options getUserAgent]) {
@@ -85,9 +89,8 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
         }
         NSError * error = nil;
         contentData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-        if (error == nil)
-        {
-            if([response isKindOfClass:[NSHTTPURLResponse class]]){
+        if (error == nil) {
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                 NSInteger responseCode = [(NSHTTPURLResponse *) response statusCode];
                 if(responseCode >= 300 && responseCode < 400) {
                     NSDictionary* headers = [(NSHTTPURLResponse *) response allHeaderFields];
@@ -100,7 +103,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     }
     
     urlContent.htmlSource = contentData;
-    if(response){
+    if (response) {
         urlContent.contentType = response.MIMEType;
         urlContent.contentEncoding = response.textEncodingName;
     }
@@ -114,17 +117,17 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     _webView.delegate = self;
     _webView.hidden = YES;
     [_webView loadData:urlContent.htmlSource
-                  MIMEType:urlContent.contentType
-          textEncodingName:urlContent.contentEncoding
-                   baseURL:[NSURL URLWithString:@""]];
+              MIMEType:urlContent.contentType
+      textEncodingName:urlContent.contentEncoding
+               baseURL:[NSURL URLWithString:@""]];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void) webViewDidFinishLoad:(UIWebView *)webView {
     [self ExtractAppLuanchConfigUsingJavaScript:webView];
 }
 
 
-- (void)ExtractAppLuanchConfigUsingJavaScript:(UIWebView *)webView {
+- (void) ExtractAppLuanchConfigUsingJavaScript:(UIWebView *)webView {
     AppLaunchConfig *appLaunchConfig = [[AppLaunchConfig alloc]init];
     appLaunchConfig.actualUri = _actualUri;
     appLaunchConfig.targetAppFallbackUrl = _actualUri;

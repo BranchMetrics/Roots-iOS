@@ -11,18 +11,17 @@
 
 @implementation AppLaunchConfig
 
+//--- Keys for FB app link properties ---------//
 NSString * const PROPERTY_KEY = @"property";
 NSString * const CONTENT_KEY = @"content";
-
 NSString * const PROPERTY_APP_NAME_KEY = @"al:ios:app_name";
 NSString * const PROPERTY_IOS_URL_KEY = @"al:ios:url";
 NSString * const PROPERTY_APPSTORE_ID_KEY = @"al:ios:app_store_id";
 NSString * const PROPERTY_WEB_URL_KEY = @"al:web:url";
 NSString * const PROPERTY_ALWAYS_WEB_FALLBACK_KEY = @"al:web:should_fallback";
-
 NSInteger const PORT_UNDEFINED = -1;
 
-+ (AppLaunchConfig *) initialize:(NSArray *) applinkMetadataArray withUrl:(NSString *) url {
++ (AppLaunchConfig *) initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url {
     AppLaunchConfig *appLaunchConfig = [[AppLaunchConfig alloc] init];
     appLaunchConfig.actualUri = url;
     appLaunchConfig.targetAppFallbackUrl = url;
