@@ -23,6 +23,8 @@
 
 static Roots *roots;
 
+//TODO: PRS need to add an array of RootFinderObject here and make Roots Singelton inorder to allow concurrent connect calls
+
 + (void) connect:(NSString *)url withDelegate:(id)callback andWithOptions:(RootsLinkOptions *)options {
     roots = [[Roots alloc]init];
     roots.rootsFinder = [[RootsFinder alloc] init];
