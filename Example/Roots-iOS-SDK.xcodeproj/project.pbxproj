@@ -481,7 +481,7 @@
 				GCC_PREFIX_HEADER = "Roots-iOS-SDK/Roots-iOS-SDK-Prefix.pch";
 				INFOPLIST_FILE = "Roots-iOS-SDK/Roots-iOS-SDK-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Roots-iOS-SDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -497,7 +497,7 @@
 				GCC_PREFIX_HEADER = "Roots-iOS-SDK/Roots-iOS-SDK-Prefix.pch";
 				INFOPLIST_FILE = "Roots-iOS-SDK/Roots-iOS-SDK-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.Roots-iOS-SDK";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
