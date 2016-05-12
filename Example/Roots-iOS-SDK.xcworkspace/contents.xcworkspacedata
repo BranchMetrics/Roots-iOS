@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Roots-SDK-Routing-TestBed/Roots-SDK-Routing-TestBed.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Roots-iOS-SDK.xcodeproj">
    </FileRef>
    <FileRef
