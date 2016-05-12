@@ -21,7 +21,7 @@ static DeepLinkRouter *deepLinkRouter;
 
 + (DeepLinkRouter *) getInstance {
     if(!deepLinkRouter) {
-        deepLinkRouter = [DeepLinkRouter alloc]int]
+        deepLinkRouter = [[DeepLinkRouter alloc]init];
     }
     return deepLinkRouter;
 }
@@ -45,7 +45,7 @@ static DeepLinkRouter *deepLinkRouter;
 }
 
 
-- (UIViewController *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString) alKey {
+- (UIViewController *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey {
     UIViewController *matchedUIViewController;
     NSMutableDictionary *alTypeDictionary = [self.deepLinkRoutingMap objectForKey:alKey];
     if (alTypeDictionary) {
@@ -59,13 +59,17 @@ static DeepLinkRouter *deepLinkRouter;
     return matchedUIViewController;
 }
 
-- (Bool) CheckForMatch:(NSString *)url format:(NSString *) urlFormat {
+- (BOOL) CheckForMatch:(NSString *)url format:(NSString *) urlFormat {
     BOOL isMatch = false;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:
                                   @"(\\{[^}]*\\})" options:0 error:nil];
-    NSREgularExpression *valueExpression = [NSREgularExpression regularExpressionWithPattern [regex replaceMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@".+"]];
     
-    if([valueExpression numberOfMatchesInString:url options:0 range:[url length]] > 0){
+    NSString *valueExpressionStr = [regex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@".+"];
+    NSRegularExpression *valueExpression = [NSRegularExpression regularExpressionWithPattern: valueExpressionStr options:0 error:nil];
+    
+    
+    
+    if([valueExpression numberOfMatchesInString:url options:0 range:NSMakeRange(0,[url length])] > 0){
         return true;
     }
     
