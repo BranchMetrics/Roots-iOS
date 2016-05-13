@@ -34,11 +34,12 @@ static DeepLinkRouter *deepLinkRouter;
     return self;
 }
 
-- (void) registerForRouting:(UIViewController *) uiViewController forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
-    NSMutableDictionary *alTypeDictionary = [self.deepLinkRoutingMap objectForKey:alKey];
++ (void) registerForRouting:(UIViewController *) uiViewController forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
+    DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
+    NSMutableDictionary *alTypeDictionary = [deepLinRouter.deepLinkRoutingMap objectForKey:alKey];
     if( !alTypeDictionary) {
         alTypeDictionary = [[NSMutableDictionary alloc] init];
-        [self.deepLinkRoutingMap setObject:alTypeDictionary forKey:alKey];
+        [deepLinRouter.deepLinkRoutingMap setObject:alTypeDictionary forKey:alKey];
     }
         
     [alTypeDictionary setObject:uiViewController forKey:valueFormat];
@@ -60,20 +61,17 @@ static DeepLinkRouter *deepLinkRouter;
 }
 
 - (BOOL) CheckForMatch:(NSString *)url format:(NSString *) urlFormat {
-    BOOL isMatch = false;
+    BOOL isMatch = NO;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:
                                   @"(\\{[^}]*\\})" options:0 error:nil];
     
     NSString *valueExpressionStr = [regex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@".+"];
     NSRegularExpression *valueExpression = [NSRegularExpression regularExpressionWithPattern: valueExpressionStr options:0 error:nil];
     
-    
-    
     if([valueExpression numberOfMatchesInString:url options:0 range:NSMakeRange(0,[url length])] > 0){
-        return true;
+        isMatch =  YES;
     }
-    
-    return false;
+    return isMatch;
     
 }
 

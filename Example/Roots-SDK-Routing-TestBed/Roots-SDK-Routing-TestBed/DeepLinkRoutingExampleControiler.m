@@ -1,25 +1,26 @@
 //
-//  DetailViewController.m
+//  DeepLinkRoutingExampleControiler.m
 //  Roots-SDK-Routing-TestBed
 //
-//  Created by Sojan P.R. on 5/12/16.
+//  Created by Sojan P.R. on 5/13/16.
 //  Copyright © 2016 Branch. All rights reserved.
 //
 
-#import "RoutingViewController.h"
+#import <Foundation/Foundation.h>
+#import "DeepLinkRoutingExampleController.h"
 
-@interface DetailViewController ()
+@interface DeepLinkRoutingExampleController()
 
 @end
 
-@implementation DetailViewController
+@implementation DeepLinkRoutingExampleController
 
 #pragma mark - Managing the detail item
 
 - (void)setDetailItem:(id)newDetailItem {
     if (_detailItem != newDetailItem) {
         _detailItem = newDetailItem;
-            
+        
         // Update the view.
         [self configureView];
     }
@@ -36,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
-       
+    
     
 }
 

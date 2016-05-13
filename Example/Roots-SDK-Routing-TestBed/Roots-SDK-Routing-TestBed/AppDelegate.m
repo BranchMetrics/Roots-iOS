@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "RoutingViewController.h"
+#import "DeepLinkRouter.h"
+#import "DeepLinkRoutingExampleController.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -22,6 +24,12 @@
     UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
     navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
     splitViewController.delegate = self;
+    
+    // Configure controller for deeplinking
+//    DeepLinkRoutingExampleController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"DetailViewController"];
+//    [DeepLinkRouter registerForRouting:controller forAppLinkKey:@"al:android:url" withValueFormat:@"myscheme://*/user/{User_ID}/{Name}"];
+//    [DeepLinkRouter registerForRouting:controller forAppLinkKey:@"al:web:url" withValueFormat:@"https://my_awesome_site.com/*/{user_id}"];
+
     return YES;
 }
 

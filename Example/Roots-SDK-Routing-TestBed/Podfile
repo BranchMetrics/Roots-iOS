@@ -1,0 +1,7 @@
+use_frameworks!
+
+target 'Roots-SDK-Routing-TestBed' do
+  pod 'Roots-iOS-SDK', :path => '../../'
+end
+
+

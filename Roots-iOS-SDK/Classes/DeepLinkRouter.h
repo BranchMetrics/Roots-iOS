@@ -14,4 +14,6 @@
 
 @interface DeepLinkRouter : NSObject
 
++ (void) registerForRouting:(UIViewController *) uiViewController forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat;
+
 @end

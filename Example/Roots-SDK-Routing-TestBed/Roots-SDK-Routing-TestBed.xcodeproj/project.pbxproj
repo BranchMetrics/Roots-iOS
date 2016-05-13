@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D670C7E1CE66CA90088E78C /* DeepLinkRoutingExampleControiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D670C7D1CE66CA90088E78C /* DeepLinkRoutingExampleControiler.m */; };
 		7DD724621CE5024F0056E0AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD724611CE5024F0056E0AB /* main.m */; };
 		7DD724651CE5024F0056E0AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD724641CE5024F0056E0AB /* AppDelegate.m */; };
 		7DD7246B1CE5024F0056E0AB /* RoutingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD7246A1CE5024F0056E0AB /* RoutingViewController.m */; };
@@ -16,6 +17,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		282938EEE5262B4305238B73 /* Pods-Roots-SDK-Routing-TestBed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Roots-SDK-Routing-TestBed.release.xcconfig"; path = "Pods/Target Support Files/Pods-Roots-SDK-Routing-TestBed/Pods-Roots-SDK-Routing-TestBed.release.xcconfig"; sourceTree = "<group>"; };
+		2C36871003B9F394925BE149 /* Pods-Roots-SDK-Routing-TestBed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Roots-SDK-Routing-TestBed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Roots-SDK-Routing-TestBed/Pods-Roots-SDK-Routing-TestBed.debug.xcconfig"; sourceTree = "<group>"; };
+		7D670C7C1CE66C5F0088E78C /* DeepLinkRoutingExampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeepLinkRoutingExampleController.h; sourceTree = "<group>"; };
+		7D670C7D1CE66CA90088E78C /* DeepLinkRoutingExampleControiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeepLinkRoutingExampleControiler.m; sourceTree = "<group>"; };
 		7DD7245D1CE5024F0056E0AB /* Roots-SDK-Routing-TestBed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roots-SDK-Routing-TestBed.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD724611CE5024F0056E0AB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7DD724631CE5024F0056E0AB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -44,6 +49,8 @@
 			children = (
 				7DD7245F1CE5024F0056E0AB /* Roots-SDK-Routing-TestBed */,
 				7DD7245E1CE5024F0056E0AB /* Products */,
+				D3584E4E0D273CB94D1E83B2 /* Pods */,
+				CCB3AA4B34F88108D96C1351 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +67,8 @@
 			children = (
 				7DD724631CE5024F0056E0AB /* AppDelegate.h */,
 				7DD724641CE5024F0056E0AB /* AppDelegate.m */,
+				7D670C7C1CE66C5F0088E78C /* DeepLinkRoutingExampleController.h */,
+				7D670C7D1CE66CA90088E78C /* DeepLinkRoutingExampleControiler.m */,
 				7DD724691CE5024F0056E0AB /* RoutingViewController.h */,
 				7DD7246A1CE5024F0056E0AB /* RoutingViewController.m */,
 				7DD7246C1CE5024F0056E0AB /* Main.storyboard */,
@@ -79,6 +88,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CCB3AA4B34F88108D96C1351 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3584E4E0D273CB94D1E83B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2C36871003B9F394925BE149 /* Pods-Roots-SDK-Routing-TestBed.debug.xcconfig */,
+				282938EEE5262B4305238B73 /* Pods-Roots-SDK-Routing-TestBed.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +111,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7DD724771CE5024F0056E0AB /* Build configuration list for PBXNativeTarget "Roots-SDK-Routing-TestBed" */;
 			buildPhases = (
+				A8BC47C770E70AB32A643FC7 /* 📦 Check Pods Manifest.lock */,
 				7DD724591CE5024F0056E0AB /* Sources */,
 				7DD7245A1CE5024F0056E0AB /* Frameworks */,
 				7DD7245B1CE5024F0056E0AB /* Resources */,
+				A1125BAE9E9AF38B8C6F90E0 /* 📦 Embed Pods Frameworks */,
+				2850A9CAE7DA3393AADCADFE /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -144,6 +172,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2850A9CAE7DA3393AADCADFE /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Roots-SDK-Routing-TestBed/Pods-Roots-SDK-Routing-TestBed-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A1125BAE9E9AF38B8C6F90E0 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Roots-SDK-Routing-TestBed/Pods-Roots-SDK-Routing-TestBed-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A8BC47C770E70AB32A643FC7 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7DD724591CE5024F0056E0AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -151,6 +227,7 @@
 			files = (
 				7DD724651CE5024F0056E0AB /* AppDelegate.m in Sources */,
 				7DD724621CE5024F0056E0AB /* main.m in Sources */,
+				7D670C7E1CE66CA90088E78C /* DeepLinkRoutingExampleControiler.m in Sources */,
 				7DD7246B1CE5024F0056E0AB /* RoutingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +336,7 @@
 		};
 		7DD724781CE5024F0056E0AB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C36871003B9F394925BE149 /* Pods-Roots-SDK-Routing-TestBed.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Roots-SDK-Routing-TestBed/Info.plist";
@@ -270,6 +348,7 @@
 		};
 		7DD724791CE5024F0056E0AB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 282938EEE5262B4305238B73 /* Pods-Roots-SDK-Routing-TestBed.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Roots-SDK-Routing-TestBed/Info.plist";
@@ -298,6 +377,7 @@
 				7DD724791CE5024F0056E0AB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
