@@ -41,7 +41,7 @@ static DeepLinkRouter *deepLinkRouter;
         alTypeDictionary = [[NSMutableDictionary alloc] init];
         [deepLinRouter.deepLinkRoutingMap setObject:alTypeDictionary forKey:alKey];
     }
-        
+    
     [alTypeDictionary setObject:uiViewController forKey:valueFormat];
 }
 
@@ -74,16 +74,17 @@ static DeepLinkRouter *deepLinkRouter;
     return isMatch;
 }
 
-+ (void) handleDeeplinkRouting:(NSString *)url {
++ (void) handleDeeplinkRouting:(NSURL *)url {
+    NSString *urlStr = [url absoluteString];
     DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
     // First look for an ios url Strong match
-    UIViewController *strongMatchController = [deepLinRouter getMatchingViewControllerForUrl:url andALtype:@"al:ios:url"];
+    UIViewController *strongMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url"];
     if (strongMatchController) {
         [deepLinRouter launchViewController:strongMatchController];
     }
     // if a strong ios url match not found check for a  web url match
     else {
-        UIViewController *weakMatchController = [deepLinRouter getMatchingViewControllerForUrl:url andALtype:@"al:web:url"];
+        UIViewController *weakMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url"];
         if (weakMatchController) {
             [deepLinRouter launchViewController:weakMatchController];
         }
@@ -91,27 +92,8 @@ static DeepLinkRouter *deepLinkRouter;
 }
 
 - (void) launchViewController:(UIViewController *) viewController {
-
-//        if ([viewController respondsToSelector:@selector(configureControlWithData:)]) {
-//            [branchSharingController configureControlWithData:latestReferringParams];
-//        }
-//        else {
-//            [self.preferenceHelper log:FILE_NAME line:LINE_NUM message:@"[Branch Warning] View controller does not implement configureControlWithData:"];
-//        }
-        //branchSharingController.deepLinkingCompletionDelegate = self;
-        UIViewController *deepLinkPresentingController = [[[UIApplication sharedApplication].delegate window] rootViewController];
-        
-//        if ([deepLinkPresentingController presentedViewController]) {
-//            [deepLinkPresentingController dismissViewControllerAnimated:NO completion:^{
-//                [deepLinkPresentingController presentViewController:branchSharingController animated:YES completion:NULL];
-//            }];
-//        }
-//        else {
-            [deepLinkPresentingController presentViewController:viewController animated:YES completion:NULL];
-//        }
-    }
-
-    
+    UIViewController *deepLinkPresentingController = [[[UIApplication sharedApplication].delegate window] rootViewController];
+    [deepLinkPresentingController presentViewController:viewController animated:YES completion:NULL];
 }
 
 @end

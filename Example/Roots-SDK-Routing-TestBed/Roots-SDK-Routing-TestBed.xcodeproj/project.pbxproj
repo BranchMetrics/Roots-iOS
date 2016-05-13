@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D298B5BB2CAF73D75098914 /* Pods_Roots_SDK_Routing_TestBed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818F2EF8E786B9916C40835E /* Pods_Roots_SDK_Routing_TestBed.framework */; };
 		7D670C7E1CE66CA90088E78C /* DeepLinkRoutingExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D670C7D1CE66CA90088E78C /* DeepLinkRoutingExampleController.m */; };
 		7DD724621CE5024F0056E0AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD724611CE5024F0056E0AB /* main.m */; };
 		7DD724651CE5024F0056E0AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD724641CE5024F0056E0AB /* AppDelegate.m */; };
@@ -14,7 +15,6 @@
 		7DD7246E1CE5024F0056E0AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD7246C1CE5024F0056E0AB /* Main.storyboard */; };
 		7DD724701CE5024F0056E0AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DD7246F1CE5024F0056E0AB /* Assets.xcassets */; };
 		7DD724731CE5024F0056E0AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7DD724711CE5024F0056E0AB /* LaunchScreen.storyboard */; };
-		907209D446C724D43AE8A35C /* Pods_Roots_SDK_Routing_TestBed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D2A1C8E5777E3331A13815 /* Pods_Roots_SDK_Routing_TestBed.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		7DD7246F1CE5024F0056E0AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DD724721CE5024F0056E0AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DD724741CE5024F0056E0AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0D2A1C8E5777E3331A13815 /* Pods_Roots_SDK_Routing_TestBed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Roots_SDK_Routing_TestBed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		818F2EF8E786B9916C40835E /* Pods_Roots_SDK_Routing_TestBed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Roots_SDK_Routing_TestBed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				907209D446C724D43AE8A35C /* Pods_Roots_SDK_Routing_TestBed.framework in Frameworks */,
+				7D298B5BB2CAF73D75098914 /* Pods_Roots_SDK_Routing_TestBed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +94,7 @@
 		CCB3AA4B34F88108D96C1351 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A0D2A1C8E5777E3331A13815 /* Pods_Roots_SDK_Routing_TestBed.framework */,
+				818F2EF8E786B9916C40835E /* Pods_Roots_SDK_Routing_TestBed.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
