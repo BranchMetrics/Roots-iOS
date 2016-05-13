@@ -40,10 +40,6 @@
                 applinkMetadataJsonArray:debugAppLinkMetadataJson
                 andCallback:self];
     }
-    
-    [DeepLinkRouter registerForRouting:self forAppLinkKey:@"al:android:url" withValueFormat:@"myscheme://*/user/{User_ID}/{Name}"];
-    
-    [DeepLinkRouter registerForRouting:self forAppLinkKey:@"al:web:url" withValueFormat:@"https://my_awesome_site.com/*/{user_id}"];
 }
 
 - (void)applicationLaunched:(NSString *)appName appStoreID:(NSString *)appStoreID {

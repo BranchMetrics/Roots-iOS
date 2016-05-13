@@ -62,10 +62,12 @@ static DeepLinkRouter *deepLinkRouter;
 
 - (BOOL) CheckForMatch:(NSString *)url format:(NSString *) urlFormat {
     BOOL isMatch = NO;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:
-                                  @"(\\{[^}]*\\})" options:0 error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\{[^}]*\\})" options:0 error:nil];
+    NSString *valueExpressionStr = [regex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@"(.+)"];
     
-    NSString *valueExpressionStr = [regex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@".+"];
+    regex = [NSRegularExpression regularExpressionWithPattern:@"\\*" options:0 error:nil];
+    valueExpressionStr = [regex stringByReplacingMatchesInString:valueExpressionStr options:0 range:NSMakeRange(0, [valueExpressionStr length]) withTemplate:@".+"];
+    
     NSRegularExpression *valueExpression = [NSRegularExpression regularExpressionWithPattern: valueExpressionStr options:0 error:nil];
     
     if([valueExpression numberOfMatchesInString:url options:0 range:NSMakeRange(0,[url length])] > 0){
