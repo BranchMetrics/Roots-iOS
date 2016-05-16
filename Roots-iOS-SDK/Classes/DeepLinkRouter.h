@@ -14,7 +14,7 @@
 
 @interface DeepLinkRouter : NSObject
 
-+ (void) registerForRouting:(UIViewController *) uiViewController forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat;
++ (void) registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat;
 + (void) handleDeeplinkRouting:(NSURL *)url;
 
 @end

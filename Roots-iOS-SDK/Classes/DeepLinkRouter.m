@@ -35,7 +35,7 @@ static DeepLinkRouter *deepLinkRouter;
     return self;
 }
 
-+ (void) registerForRouting:(UIViewController *) uiViewController forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
++ (void) registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
     DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
     NSMutableDictionary *alTypeDictionary = [deepLinRouter.deepLinkRoutingMap objectForKey:alKey];
     if( !alTypeDictionary) {
@@ -43,7 +43,7 @@ static DeepLinkRouter *deepLinkRouter;
         [deepLinRouter.deepLinkRoutingMap setObject:alTypeDictionary forKey:alKey];
     }
     
-    [alTypeDictionary setObject:uiViewController forKey:valueFormat];
+    [alTypeDictionary setObject:controllerId forKey:valueFormat];
 }
 
 
@@ -56,7 +56,8 @@ static DeepLinkRouter *deepLinkRouter;
     if (alTypeDictionary) {
         for (NSString * key in alTypeDictionary){
             if ( [self CheckForMatch:url format:key]){
-                matchedUIViewController = [alTypeDictionary objectForKey:key];
+                NSString *contollerId = [alTypeDictionary objectForKey:key];
+                matchedUIViewController =[[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:contollerId];
                 matchedURLFormat = key;
                 break;
             }
