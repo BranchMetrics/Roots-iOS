@@ -24,6 +24,13 @@ enum RootsError {
 @end
 
 
+@protocol RootsRoutingDelegate <NSObject>
+
+- (void) configureControlWithRoutingData:(NSDictionary *) routingParams;
+
+@end
+
+
 @interface Roots : NSObject
 
 /**

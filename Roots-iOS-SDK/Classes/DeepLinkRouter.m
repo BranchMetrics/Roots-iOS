@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DeepLinkRouter.h"
+#import "Roots.h"
 
 @interface DeepLinkRouter ()
 
@@ -46,16 +47,23 @@ static DeepLinkRouter *deepLinkRouter;
 }
 
 
-- (UIViewController *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey {
+
+
+- (UIViewController *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
     UIViewController *matchedUIViewController;
+    NSString *matchedURLFormat;
     NSMutableDictionary *alTypeDictionary = [self.deepLinkRoutingMap objectForKey:alKey];
     if (alTypeDictionary) {
         for (NSString * key in alTypeDictionary){
             if ( [self CheckForMatch:url format:key]){
                 matchedUIViewController = [alTypeDictionary objectForKey:key];
+                matchedURLFormat = key;
                 break;
             }
         }
+    }
+    if (matchedUIViewController) {
+        *paramDict = [self getParamValueMap:url withFormat:matchedURLFormat];
     }
     return matchedUIViewController;
 }
@@ -79,23 +87,59 @@ static DeepLinkRouter *deepLinkRouter;
 + (void) handleDeeplinkRouting:(NSURL *)url {
     NSString *urlStr = [url absoluteString];
     DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc]init];
     // First look for an ios url Strong match
-    UIViewController *strongMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url"];
+    UIViewController *strongMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
     if (strongMatchController) {
-        [deepLinRouter launchViewController:strongMatchController];
+        [deepLinRouter launchViewController:strongMatchController withParamsDict:paramsDict];
     }
     // if a strong ios url match not found check for a  web url match
     else {
-        UIViewController *weakMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url"];
+        UIViewController *weakMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url" withParamDict:&paramsDict];
         if (weakMatchController) {
-            [deepLinRouter launchViewController:weakMatchController];
+            [deepLinRouter launchViewController:weakMatchController withParamsDict:paramsDict];
         }
     }
 }
 
-- (void) launchViewController:(UIViewController *) viewController {
+- (void) launchViewController:(UIViewController *) viewController withParamsDict:(NSDictionary *)paramDict {
     UIViewController *deepLinkPresentingController = [[[UIApplication sharedApplication].delegate window] rootViewController];
+     
+    if ([deepLinkPresentingController conformsToProtocol:@protocol(RootsRoutingDelegate)]) {
+        UIViewController <RootsRoutingDelegate> *rootsRoutingDelegateInstance = (UIViewController <RootsRoutingDelegate> *) deepLinkPresentingController;
+        [rootsRoutingDelegateInstance configureControlWithRoutingData:paramDict];
+    }
     [deepLinkPresentingController presentViewController:viewController animated:YES completion:NULL];
+}
+
+- (NSMutableDictionary *) getParamValueMap:(NSString *)url withFormat:(NSString *) urlFormat {
+    NSMutableDictionary * paramValDict = [[NSMutableDictionary alloc] init];
+    
+    NSRegularExpression *valueRegex = [NSRegularExpression regularExpressionWithPattern:@"(\\{[^}]*\\})" options:0 error:nil];
+    NSString *valueExpressionStr = [valueRegex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@"(.+)"];
+    valueRegex = [NSRegularExpression regularExpressionWithPattern:@"\\*" options:0 error:nil];
+    valueExpressionStr = [valueRegex stringByReplacingMatchesInString:valueExpressionStr options:0 range:NSMakeRange(0, [valueExpressionStr length]) withTemplate:@".+"];
+    NSRegularExpression *valueExpression = [NSRegularExpression regularExpressionWithPattern: valueExpressionStr options:0 error:nil];
+    
+    NSRegularExpression *paramRegex = [NSRegularExpression regularExpressionWithPattern:@"\\*" options:0 error:nil];
+    NSString *paramExpressionStr = [paramRegex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@".+"];
+    paramRegex = [NSRegularExpression regularExpressionWithPattern:@"(\\{[^/]*\\})" options:0 error:nil];
+    paramExpressionStr = [paramRegex stringByReplacingMatchesInString:paramExpressionStr options:0 range:NSMakeRange(0, [paramExpressionStr length]) withTemplate:@"\\\\{(.*?)\\\\}"];
+    NSError *errorStr;
+    NSRegularExpression *paramExpression = [NSRegularExpression regularExpressionWithPattern: paramExpressionStr options:0 error:&errorStr];
+    
+    NSTextCheckingResult *paramCheckingResult = [paramExpression firstMatchInString:urlFormat options:NSMatchingReportCompletion range:NSMakeRange(0, urlFormat.length)];
+    NSTextCheckingResult *valueCheckingResult = [valueExpression firstMatchInString:url options:NSMatchingReportCompletion range:NSMakeRange(0, url.length)];
+    
+    if ([paramCheckingResult numberOfRanges] > 1 ) {
+        for (int i = 1; i < [paramCheckingResult numberOfRanges]; i++) {
+            NSLog(@"Captured a param %@", [urlFormat substringWithRange: [paramCheckingResult rangeAtIndex:i]]);
+            if ( i < [valueCheckingResult numberOfRanges]) {
+                [paramValDict setObject:[url substringWithRange: [valueCheckingResult rangeAtIndex:i]] forKey:[urlFormat substringWithRange: [paramCheckingResult rangeAtIndex:i]]];
+            }
+        }
+    }
+    return paramValDict;
 }
 
 @end
