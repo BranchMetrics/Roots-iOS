@@ -49,24 +49,23 @@ static DeepLinkRouter *deepLinkRouter;
 
 
 
-- (UIViewController *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
-    UIViewController *matchedUIViewController;
+- (NSString *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
+    NSString *matchedUIViewControllerName = nil;
     NSString *matchedURLFormat;
     NSMutableDictionary *alTypeDictionary = [self.deepLinkRoutingMap objectForKey:alKey];
     if (alTypeDictionary) {
         for (NSString * key in alTypeDictionary){
             if ( [self CheckForMatch:url format:key]){
-                NSString *contollerId = [alTypeDictionary objectForKey:key];
-                matchedUIViewController =[[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:contollerId];
+                matchedUIViewControllerName = [alTypeDictionary objectForKey:key];
                 matchedURLFormat = key;
                 break;
             }
         }
     }
-    if (matchedUIViewController) {
+    if (matchedUIViewControllerName) {
         *paramDict = [self getParamValueMap:url withFormat:matchedURLFormat];
     }
-    return matchedUIViewController;
+    return matchedUIViewControllerName;
 }
 
 - (BOOL) CheckForMatch:(NSString *)url format:(NSString *) urlFormat {
@@ -90,27 +89,35 @@ static DeepLinkRouter *deepLinkRouter;
     DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc]init];
     // First look for an ios url Strong match
-    UIViewController *strongMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
-    if (strongMatchController) {
-        [deepLinRouter launchViewController:strongMatchController withParamsDict:paramsDict];
+    NSString *strongMatchControllerName = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
+    if (strongMatchControllerName) {
+        [deepLinRouter launchViewController:strongMatchControllerName withParamsDict:paramsDict];
     }
     // if a strong ios url match not found check for a  web url match
     else {
-        UIViewController *weakMatchController = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url" withParamDict:&paramsDict];
-        if (weakMatchController) {
-            [deepLinRouter launchViewController:weakMatchController withParamsDict:paramsDict];
+        NSString *weakMatchControllerName = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url" withParamDict:&paramsDict];
+        if (weakMatchControllerName) {
+            [deepLinRouter launchViewController:weakMatchControllerName withParamsDict:paramsDict];
         }
     }
 }
 
-- (void) launchViewController:(UIViewController *) viewController withParamsDict:(NSDictionary *)paramDict {
+- (void) launchViewController:(NSString *) viewControllerName withParamsDict:(NSDictionary *)paramDict {
     UIViewController *deepLinkPresentingController = [[[UIApplication sharedApplication].delegate window] rootViewController];
-     
-    if ([deepLinkPresentingController conformsToProtocol:@protocol(RootsRoutingDelegate)]) {
-        UIViewController <RootsRoutingDelegate> *rootsRoutingDelegateInstance = (UIViewController <RootsRoutingDelegate> *) deepLinkPresentingController;
+    
+    Class targetUIViewController = NSClassFromString(viewControllerName);
+    targetUIViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:viewControllerName];
+    
+    // Launch the controller
+    [deepLinkPresentingController presentViewController:targetUIViewController animated:YES completion:NULL];
+    
+    // Pass the roting params if controller is interested
+    if ([targetUIViewController conformsToProtocol:@protocol(RootsRoutingDelegate)]) {
+        NSLog(@"conffimes");
+        UIViewController <RootsRoutingDelegate> *rootsRoutingDelegateInstance = (UIViewController <RootsRoutingDelegate> *) targetUIViewController;
         [rootsRoutingDelegateInstance configureControlWithRoutingData:paramDict];
     }
-    [deepLinkPresentingController presentViewController:viewController animated:YES completion:NULL];
+    
 }
 
 - (NSMutableDictionary *) getParamValueMap:(NSString *)url withFormat:(NSString *) urlFormat {

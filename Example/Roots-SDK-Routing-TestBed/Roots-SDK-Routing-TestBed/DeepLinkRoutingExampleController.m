@@ -9,35 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "DeepLinkRoutingExampleController.h"
 
-@interface DeepLinkRoutingExampleController()
-
-@end
-
 @implementation DeepLinkRoutingExampleController
 
 #pragma mark - Managing the detail item
 
 - (void)setDetailItem:(id)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
-    }
+
 }
 
 - (void)configureView {
-    // Update the user interface for the detail item.
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
-    }
+ 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self configureView];
-    
     
 }
 
@@ -52,7 +39,7 @@
         NSString *value = [routingParams objectForKey:key];
         paramStr = [paramStr stringByAppendingFormat:@"%@ :%@ \n", key, value];
     }
-    _detailDescriptionLabel.text = paramStr;
+    _paramsLabel.text = paramStr;
 }
 
 @end
