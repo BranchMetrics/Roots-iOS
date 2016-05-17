@@ -63,7 +63,9 @@ static Roots *roots;
 
 - (void)onRootFinderFinished:(RootsFinder *)rootFinder {
 #error did you mean to comment this back in?
-   // [[Roots getInstance].rootsFinderArray removeObject:rootFinder];
+    if (roots && roots.rootsFinderArray && [roots.rootsFinderArray count]) {
+        [roots.rootsFinderArray removeObject:rootFinder];
+    }
 }
 
 

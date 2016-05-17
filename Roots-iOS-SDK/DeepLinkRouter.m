@@ -86,18 +86,18 @@ static DeepLinkRouter *deepLinkRouter;
 
 + (void)handleDeeplinkRouting:(NSURL *)url {
     NSString *urlStr = [url absoluteString];
-    DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
+    DeepLinkRouter *deepLinkRouter = [DeepLinkRouter getInstance];
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc]init];
     // First look for an ios url Strong match
-    NSString *strongMatchControllerName = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
+    NSString *strongMatchControllerName = [deepLinkRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
     if (strongMatchControllerName) {
-        [deepLinRouter launchViewController:strongMatchControllerName withParamsDict:paramsDict];
+        [deepLinkRouter launchViewController:strongMatchControllerName withParamsDict:paramsDict];
     }
     // if a strong ios url match not found check for a  web url match
     else {
-        NSString *weakMatchControllerName = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url" withParamDict:&paramsDict];
+        NSString *weakMatchControllerName = [deepLinkRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url" withParamDict:&paramsDict];
         if (weakMatchControllerName) {
-            [deepLinRouter launchViewController:weakMatchControllerName withParamsDict:paramsDict];
+            [deepLinkRouter launchViewController:weakMatchControllerName withParamsDict:paramsDict];
         }
     }
 }
@@ -113,7 +113,6 @@ static DeepLinkRouter *deepLinkRouter;
     
     // Pass the roting params if controller is interested
     if ([targetUIViewController conformsToProtocol:@protocol(RootsRoutingDelegate)]) {
-        NSLog(@"conffimes");
         UIViewController <RootsRoutingDelegate> *rootsRoutingDelegateInstance = (UIViewController <RootsRoutingDelegate> *) targetUIViewController;
         [rootsRoutingDelegateInstance configureControlWithRoutingData:paramDict];
     }
