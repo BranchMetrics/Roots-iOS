@@ -13,20 +13,23 @@
                         <viewControllerLayoutGuide type="top" id="ecc-S0-zdy"/>
                         <viewControllerLayoutGuide type="bottom" id="145-ip-7EB"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" id="HF6-hF-vQ4" colorLabel="IBBuiltInLabel-Red">
+                    <view key="view" contentMode="redraw" horizontalCompressionResistancePriority="250" id="HF6-hF-vQ4" colorLabel="IBBuiltInLabel-Red">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Demo Applicaiton for Roots SDK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-vg-hNj">
-                                <rect key="frame" x="0.0" y="157" width="380" height="256"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Demo Applicaiton for Roots SDK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="601" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-vg-hNj">
+                                <rect key="frame" x="0.0" y="167" width="349" height="256"/>
                                 <color key="backgroundColor" red="0.96813693782255728" green="1" blue="0.9936319147604582" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="contentStretch" x="0.050000000000000003" y="0.0" width="0.0" height="0.0"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fII-Hn-yuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -40,28 +43,27 @@
                         <viewControllerLayoutGuide type="top" id="FMh-eX-VDw"/>
                         <viewControllerLayoutGuide type="bottom" id="fRj-tv-eK5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KbS-Es-qGZ">
+                    <view key="view" contentMode="scaleAspectFit" layoutMarginsFollowReadableWidth="YES" id="KbS-Es-qGZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DeepLink Routed View Controller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqo-8p-8In">
-                                <rect key="frame" x="0.0" y="192" width="411" height="293"/>
-                                <color key="backgroundColor" red="0.90284977015000234" green="1" blue="0.96327792920176603" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="99" width="403" height="293"/>
+                                <color key="backgroundColor" red="0.94319734570448677" green="1" blue="0.98336696935994616" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEST" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRH-gN-aef">
-                                <rect key="frame" x="77" y="350" width="236" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRH-gN-aef">
+                                <rect key="frame" x="83" y="289" width="236" height="96"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="paramsLabel" destination="kRH-gN-aef" id="Dt6-fP-QVb"/>
                         <outlet property="paramsTxt" destination="kRH-gN-aef" id="L3e-S4-mGB"/>
                     </connections>
                 </viewController>

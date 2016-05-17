@@ -39,7 +39,7 @@
         NSString *value = [routingParams objectForKey:key];
         paramStr = [paramStr stringByAppendingFormat:@"%@ :%@ \n", key, value];
     }
-    _paramsLabel.text = paramStr;
+    _paramsTxt.text = paramStr;
 }
 
 @end
