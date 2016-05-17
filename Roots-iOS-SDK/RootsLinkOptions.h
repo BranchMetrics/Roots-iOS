@@ -13,9 +13,11 @@
 #endif /* RootsLinkOptions_h */
 
 @interface RootsLinkOptions : NSObject
-- (void) setUserAgent:(NSString *)userAgent;
-- (void) setAlwaysFallbackToAppStore:(BOOL)alwaysFallbackToAppStore;
-- (NSString *) getUserAgent;
-- (BOOL) getAlwaysFallbackToAppStore;
-- (BOOL) isUserOverridingFallbackRule;
+
+- (void)setUserAgent:(NSString *)userAgent;
+- (void)setAlwaysFallbackToAppStore:(BOOL)alwaysFallbackToAppStore;
+- (NSString *)getUserAgent;
+- (BOOL)getAlwaysFallbackToAppStore;
+- (BOOL)isUserOverridingFallbackRule;
+
 @end

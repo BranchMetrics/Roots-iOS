@@ -36,7 +36,7 @@
 
 @implementation RootsFinder
 
-- (instancetype) init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         _webView = [[UIWebView alloc] init];
@@ -62,7 +62,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 "  return JSON.stringify(results);"
 "})()";
 
-- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback withStateDelegate:(id)stateCallback andOptions:(RootsLinkOptions *)options {
+- (void)findAndFollowRoots:(NSString *)url withDelegate:(id)callback withStateDelegate:(id)stateCallback andOptions:(RootsLinkOptions *)options {
     _rootsEventCallback = callback;
     _rootFinderStateCallback = stateCallback;
     _options = options;
@@ -84,7 +84,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     }
 }
 
-- (URLContent *) getUrlContent:(NSString *)url {
+- (URLContent *)getUrlContent:(NSString *)url {
     _actualUri = url;
     NSString *redirectedUrl = url;
     URLContent *urlContent = [[URLContent alloc] init];
@@ -121,7 +121,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 }
 
 
-- (void) scrapeAppLinkContent:(URLContent *)urlContent {
+- (void)scrapeAppLinkContent:(URLContent *)urlContent {
     UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
     [window addSubview:self.webView];
     _webView.delegate = self;
@@ -133,11 +133,11 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 }
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
-    [self ExtractAppLuanchConfigUsingJavaScript:webView];
+    [self extractAppLaunchConfigUsingJavaScript:webView];
 }
 
 
-- (void) ExtractAppLuanchConfigUsingJavaScript:(UIWebView *)webView {
+- (void)extractAppLaunchConfigUsingJavaScript:(UIWebView *)webView {
     AppLaunchConfig *appLaunchConfig = [[AppLaunchConfig alloc]init];
     appLaunchConfig.actualUri = _actualUri;
     appLaunchConfig.targetAppFallbackUrl = _actualUri;
@@ -158,7 +158,7 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     }
 }
 
-- (BOOL) isValidURL:(NSString *)url {
+- (BOOL)isValidURL:(NSString *)url {
     BOOL isValid = NO;
     NSUInteger length = [url length];
     if (length > 0) {

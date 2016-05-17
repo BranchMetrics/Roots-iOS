@@ -6,11 +6,12 @@
 //
 //
 
+# error Let's rename this to RootsAppRouter
 @interface AppRouter : NSObject
 
 /*
  * Method for handling routing to app or to fallback options based on the app launch configuration
  */
-+ (BOOL) handleAppRouting:(AppLaunchConfig *)appLaunchConfig withDelegate:(id)callback;
++ (BOOL)handleAppRouting:(AppLaunchConfig *)appLaunchConfig withDelegate:(id)callback;
 
 @end

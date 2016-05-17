@@ -10,6 +10,7 @@
 #import "Roots.h"
 
 @interface RootsViewController : UIViewController <RootsEventsDelegate> {
+#error what's this? atypical iOS code.
     NSMutableData *_responseData;
 }
 @property (weak, nonatomic) IBOutlet UITextField *navUrlTxt;

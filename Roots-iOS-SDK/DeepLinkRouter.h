@@ -6,15 +6,18 @@
 //
 //
 
+#error ??
 #ifndef DeepLinkRouter_h
 #define DeepLinkRouter_h
 
 
 #endif /* DeepLinkRouter_h */
 
+
+#error rename to RootsDeepLinkRouter
 @interface DeepLinkRouter : NSObject
 
-+ (void) registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat;
-+ (void) handleDeeplinkRouting:(NSURL *)url;
++ (void)registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat;
++ (void)handleDeeplinkRouting:(NSURL *)url;
 
 @end

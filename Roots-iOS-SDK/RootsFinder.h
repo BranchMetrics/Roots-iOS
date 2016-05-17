@@ -15,13 +15,13 @@
 /**
  * Captures the appLaunchConfiguration for url specified and routes according to the launch config
  */
-- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback withStateDelegate:(id)stateCallback andOptions:(RootsLinkOptions *)options;
+- (void)findAndFollowRoots:(NSString *)url withDelegate:(id)callback withStateDelegate:(id)stateCallback andOptions:(RootsLinkOptions *)options;
 
 @end
 
 
 @protocol RootFinderStateDelegate <NSObject>
 
-- (void) onRootFinderFinished:(RootsFinder *)rootFinder;
+- (void)onRootFinderFinished:(RootsFinder *)rootFinder;
 
 @end

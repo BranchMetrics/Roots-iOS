@@ -1,3 +1,5 @@
+#error Can you standardize the comment headers across all of the files
+
 #import <Foundation/Foundation.h>
 #import "AppLaunchConfig.h"
 #import "AppRouter.h"
@@ -6,7 +8,7 @@
 
 @implementation AppRouter
 
-+ (BOOL) handleAppRouting:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback  {
++ (BOOL)handleAppRouting:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback  {
     BOOL routingHandled = YES;
     if ([appLaunchConfig isLaunchSchemeAvailable]) {
         [self openAppWithUriScheme:appLaunchConfig withDelegate:callback];
@@ -17,7 +19,7 @@
     return routingHandled;
 }
 
-+ (void) openAppWithUriScheme:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback {
++ (void)openAppWithUriScheme:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback {
     NSString *uriString = [appLaunchConfig.targetAppLaunchScheme stringByAppendingString:@"://"];
     if (appLaunchConfig.targetAppLaunchHost) {
         uriString = [uriString stringByAppendingString:appLaunchConfig.targetAppLaunchHost];
@@ -44,7 +46,7 @@
     }
 }
 
-+ (void) openAppstore:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback {
++ (void)openAppstore:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback {
     NSString *appStoreUri = @"itms-apps://itunes.apple.com/app/id";
     appStoreUri = [appStoreUri stringByAppendingString: appLaunchConfig.targetAppStoreID];
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString:appStoreUri]];
@@ -54,7 +56,7 @@
     
 }
 
-+ (void) openFallbackUrl:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback {
++ (void)openFallbackUrl:(AppLaunchConfig *)appLaunchConfig withDelegate:(id<RootsEventsDelegate>)callback {
     NSURL *url = [NSURL URLWithString:appLaunchConfig.targetAppFallbackUrl];
     [[UIApplication sharedApplication] openURL:url];
     if (callback) {

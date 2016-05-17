@@ -6,12 +6,13 @@
 //
 //
 
+#error what are these doing?
 #ifndef URLContent_h
 #define URLContent_h
-
-
 #endif /* URLContent_h */
 
+
+#error let's rename this to RootsURLContent
 @interface URLContent : NSObject
 
 @property (strong, nonatomic) NSString *contentType;

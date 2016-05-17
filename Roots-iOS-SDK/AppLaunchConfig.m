@@ -21,7 +21,7 @@ NSString * const PROPERTY_WEB_URL_KEY = @"al:web:url";
 NSString * const PROPERTY_ALWAYS_WEB_FALLBACK_KEY = @"al:web:should_fallback";
 NSInteger const PORT_UNDEFINED = -1;
 
-+ (AppLaunchConfig *) initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url {
++ (AppLaunchConfig *)initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url {
     AppLaunchConfig *appLaunchConfig = [[AppLaunchConfig alloc] init];
     appLaunchConfig.actualUri = url;
     appLaunchConfig.targetAppFallbackUrl = url;
@@ -56,7 +56,7 @@ NSInteger const PORT_UNDEFINED = -1;
     return appLaunchConfig;
 }
 
-- (BOOL) isLaunchSchemeAvailable {
+- (BOOL)isLaunchSchemeAvailable {
     return !([self.targetAppLaunchScheme isKindOfClass: [NSNull class]] || self.targetAppLaunchScheme.length == 0);
 }
 

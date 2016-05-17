@@ -16,17 +16,17 @@ enum RootsError {
 
 @protocol RootsEventsDelegate <NSObject>
 
-- (void) applicationLaunched:(NSString *)appName appStoreID:(NSString *)appStoreID;
-- (void) fallbackUrlOpened:(NSString *)fallbackUrl;
-- (void) appStoreOpened:(NSString *)appName appStoreID:(NSString *)appStoreID;
-- (void) rootsError:(enum RootsError)error;
+- (void)applicationLaunched:(NSString *)appName appStoreID:(NSString *)appStoreID;
+- (void)fallbackUrlOpened:(NSString *)fallbackUrl;
+- (void)appStoreOpened:(NSString *)appName appStoreID:(NSString *)appStoreID;
+- (void)rootsError:(enum RootsError)error;
 
 @end
 
 
 @protocol RootsRoutingDelegate <NSObject>
 
-- (void) configureControlWithRoutingData:(NSDictionary *) routingParams;
+- (void)configureControlWithRoutingData:(NSDictionary *)routingParams;
 
 @end
 
@@ -36,17 +36,17 @@ enum RootsError {
 /**
  * Method route to matchong app for the given url. Routing results are provided through the delegate
  */
-+ (void) connect:(NSString *)url withDelegate:(id)callback;
++ (void)connect:(NSString *)url withDelegate:(id)callback;
 
 /**
  * Method route to matchong app for the given url. Routing results are provided through the delegate.
  * Method provides  option to set routing prefrence by passing RootsLinkOptions
  */
-+ (void) connect:(NSString *)url withDelegate:(id)callback andWithOptions:(RootsLinkOptions *)options;
++ (void)connect:(NSString *)url withDelegate:(id)callback andWithOptions:(RootsLinkOptions *)options;
 
 /**
  * Method to debug the app link routing with given app link data
  */
-+ (void) debugConnect:(NSString *)url applinkMetadataJsonArray:(NSString *)applinkData andCallback:(id)callback;
++ (void)debugConnect:(NSString *)url applinkMetadataJsonArray:(NSString *)applinkData andCallback:(id)callback;
 
 @end

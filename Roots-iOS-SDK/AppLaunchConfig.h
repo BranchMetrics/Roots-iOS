@@ -5,6 +5,9 @@
 //  Created by Sojan P.R. on 5/3/16.
 //
 //
+
+#error Rename to RootsAppLaunchConfig
+
 @interface AppLaunchConfig : NSObject
 
 @property (strong, nonatomic) NSString *actualUri;
@@ -23,11 +26,11 @@
 /*
  * Create and return an AppLaunchConfig instace from the given App Link meta data
  */
-+ (AppLaunchConfig *) initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url;
++ (AppLaunchConfig *)initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url;
 
 /*
  * Check if this Launch Config contains a scheme to launch the app.
  */
-- (BOOL) isLaunchSchemeAvailable;
+- (BOOL)isLaunchSchemeAvailable;
 
 @end

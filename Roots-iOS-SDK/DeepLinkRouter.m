@@ -20,7 +20,7 @@
 
 static DeepLinkRouter *deepLinkRouter;
 
-+ (DeepLinkRouter *) getInstance {
++ (DeepLinkRouter *)getInstance {
     if(!deepLinkRouter) {
         deepLinkRouter = [[DeepLinkRouter alloc]init];
     }
@@ -35,7 +35,7 @@ static DeepLinkRouter *deepLinkRouter;
     return self;
 }
 
-+ (void) registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
++ (void)registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
     DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
     NSMutableDictionary *alTypeDictionary = [deepLinRouter.deepLinkRoutingMap objectForKey:alKey];
     if( !alTypeDictionary) {
@@ -49,13 +49,13 @@ static DeepLinkRouter *deepLinkRouter;
 
 
 
-- (NSString *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
+- (NSString *)getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
     NSString *matchedUIViewControllerName = nil;
     NSString *matchedURLFormat;
     NSMutableDictionary *alTypeDictionary = [self.deepLinkRoutingMap objectForKey:alKey];
     if (alTypeDictionary) {
         for (NSString * key in alTypeDictionary){
-            if ( [self CheckForMatch:url format:key]){
+            if ( [self checkForMatch:url format:key]){
                 matchedUIViewControllerName = [alTypeDictionary objectForKey:key];
                 matchedURLFormat = key;
                 break;
@@ -68,7 +68,7 @@ static DeepLinkRouter *deepLinkRouter;
     return matchedUIViewControllerName;
 }
 
-- (BOOL) CheckForMatch:(NSString *)url format:(NSString *) urlFormat {
+- (BOOL)checkForMatch:(NSString *)url format:(NSString *) urlFormat {
     BOOL isMatch = NO;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\{[^}]*\\})" options:0 error:nil];
     NSString *valueExpressionStr = [regex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@"(.+)"];
@@ -84,7 +84,7 @@ static DeepLinkRouter *deepLinkRouter;
     return isMatch;
 }
 
-+ (void) handleDeeplinkRouting:(NSURL *)url {
++ (void)handleDeeplinkRouting:(NSURL *)url {
     NSString *urlStr = [url absoluteString];
     DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc]init];
@@ -102,7 +102,7 @@ static DeepLinkRouter *deepLinkRouter;
     }
 }
 
-- (void) launchViewController:(NSString *) viewControllerName withParamsDict:(NSDictionary *)paramDict {
+- (void)launchViewController:(NSString *) viewControllerName withParamsDict:(NSDictionary *)paramDict {
     UIViewController *deepLinkPresentingController = [[[UIApplication sharedApplication].delegate window] rootViewController];
     
     Class targetUIViewController = NSClassFromString(viewControllerName);
@@ -120,7 +120,7 @@ static DeepLinkRouter *deepLinkRouter;
     
 }
 
-- (NSMutableDictionary *) getParamValueMap:(NSString *)url withFormat:(NSString *) urlFormat {
+- (NSMutableDictionary *)getParamValueMap:(NSString *)url withFormat:(NSString *) urlFormat {
     NSMutableDictionary * paramValDict = [[NSMutableDictionary alloc] init];
     
     NSRegularExpression *valueRegex = [NSRegularExpression regularExpressionWithPattern:@"(\\{[^}]*\\})" options:0 error:nil];
