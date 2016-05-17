@@ -1,42 +1,19 @@
-#
-# Be sure to run `pod lib lint Roots-iOS-SDK.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
-  s.name             = "Roots-iOS-SDK"
+  s.name             = "Roots"
   s.version          = "0.1.0"
-  s.summary          = "A short description of Roots-iOS-SDK."
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  s.summary          = "An SDK for linking in-between apps."
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Roots is an open source deep linking SDK developed by Branch that promotes inter-app linking. It has functionality to help with linking on both sides: 1. the source (app where a link is clicked) and 2. the receiver (the app where a link is opened). For source apps, it leverages Facebook's App Links meta tags on the site to determine how to route the user. It attempts to open the app, but safely falls back to mobile web or the App Store depending on configuration. For receiving apps, the SDK makes it incredibly easy to map your App Links URI to a particular View Controller.
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/Roots-iOS-SDK"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/BranchMetrics/Roots-iOS-SDK"
   s.license          = 'MIT'
-  s.author           = { "sojan" => "sojan@branch.io" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/Roots-iOS-SDK.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { "Branch" => "support@branch.io" }
+  s.source           = { :git => "https://github.com/BranchMetrics/Roots-iOS-SDK.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/branchmetrics'
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'Roots-iOS-SDK/Classes/**/*'
+  s.source_files = 'Roots-iOS-SDK/**/*'
   
-  # s.resource_bundles = {
-  #   'Roots-iOS-SDK' => ['Roots-iOS-SDK/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end

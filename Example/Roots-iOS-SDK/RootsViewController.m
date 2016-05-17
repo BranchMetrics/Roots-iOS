@@ -30,7 +30,7 @@
 }
 - (IBAction)navigateBtn:(id)sender {
     if (_navUrlTxt.text && _navUrlTxt.text.length > 0) {
-        RootsLinkOptions *options = [[RootsLinkOptions alloc]init];
+        RootsLinkOptions *options = [[RootsLinkOptions alloc] init];
         [options setAlwaysFallbackToAppStore:self.AppStoreSwitch.isOn];
         [Roots connect:_navUrlTxt.text withDelegate:self andWithOptions:options];
     }

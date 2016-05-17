@@ -30,7 +30,9 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     NSLog(@"Application launched with url %@", url);
+    
     [DeepLinkRouter handleDeeplinkRouting:url];
+    
     return YES;
 }
 
