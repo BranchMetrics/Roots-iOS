@@ -6,17 +6,11 @@
 //  Copyright © 2016 Branch. All rights reserved.
 //
 
-#ifndef DeepLinkRoutingExampleController_h
-#define DeepLinkRoutingExampleController_h
-
-
-#endif /* DeepLinkRoutingExampleController_h */
 #import <UIKit/UIKit.h>
 #import "Roots.h"
 
 @interface DeepLinkRoutingExampleController : UIViewController <RootsRoutingDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *paramsTxt;
-
 
 @end
