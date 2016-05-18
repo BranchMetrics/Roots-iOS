@@ -1,16 +1,10 @@
 //
 //  RootsLinkOptions.h
-//  Pods
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/10/16.
 //
 //
-
-#ifndef RootsLinkOptions_h
-#define RootsLinkOptions_h
-
-
-#endif /* RootsLinkOptions_h */
 
 @interface RootsLinkOptions : NSObject
 

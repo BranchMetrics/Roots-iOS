@@ -1,19 +1,12 @@
 //
-//  URLContent.h
-//  Pods
+//  RootsUrlContent.h
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/5/16.
 //
 //
 
-#error what are these doing?
-#ifndef URLContent_h
-#define URLContent_h
-#endif /* URLContent_h */
-
-
-#error let's rename this to RootsURLContent
-@interface URLContent : NSObject
+@interface RootsURLContent : NSObject
 
 @property (strong, nonatomic) NSString *contentType;
 @property (strong, nonatomic) NSString *contentEncoding;

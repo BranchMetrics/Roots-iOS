@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3237C051FC558E8CB53572 /* Pods_Roots_SDK_Routing_TestBed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968C724CF0F58789D0F288C0 /* Pods_Roots_SDK_Routing_TestBed.framework */; };
 		7D670C7E1CE66CA90088E78C /* DeepLinkRoutingExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D670C7D1CE66CA90088E78C /* DeepLinkRoutingExampleController.m */; };
 		7DD724621CE5024F0056E0AB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD724611CE5024F0056E0AB /* main.m */; };
 		7DD724651CE5024F0056E0AB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DD724641CE5024F0056E0AB /* AppDelegate.m */; };
@@ -30,7 +29,6 @@
 		7DD7246F1CE5024F0056E0AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7DD724721CE5024F0056E0AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7DD724741CE5024F0056E0AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		968C724CF0F58789D0F288C0 /* Pods_Roots_SDK_Routing_TestBed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Roots_SDK_Routing_TestBed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A543911821A8533F4D2DB840 /* Pods-Roots-SDK-Routing-TestBed.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Roots-SDK-Routing-TestBed.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Roots-SDK-Routing-TestBed/Pods-Roots-SDK-Routing-TestBed.debug.xcconfig"; sourceTree = "<group>"; };
 		D7F435E0A4E7ECC1DEC922DB /* Pods-Roots-SDK-Routing-TestBed.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Roots-SDK-Routing-TestBed.release.xcconfig"; path = "Pods/Target Support Files/Pods-Roots-SDK-Routing-TestBed/Pods-Roots-SDK-Routing-TestBed.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -40,7 +38,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D3237C051FC558E8CB53572 /* Pods_Roots_SDK_Routing_TestBed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +100,6 @@
 		EADA563245A27B97A34CCC1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				968C724CF0F58789D0F288C0 /* Pods_Roots_SDK_Routing_TestBed.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

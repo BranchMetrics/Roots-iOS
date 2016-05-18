@@ -1,6 +1,6 @@
 //
 //  RootsLinkOptions.m
-//  Pods
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/10/16.
 //

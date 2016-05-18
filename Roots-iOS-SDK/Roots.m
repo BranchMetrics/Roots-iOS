@@ -1,6 +1,6 @@
 //
 //  Roots.m
-//  Pods
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/3/16.
 //
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Roots.h"
 #import "RootsFinder.h"
-#import "AppRouter.h"
+#import "RootsAppRouter.h"
 
 @interface Roots() <RootFinderStateDelegate>
 /**
@@ -51,18 +51,16 @@ static Roots *roots;
     [self connect:url withDelegate:callback andWithOptions:options];
 }
 
-#error Why is applinkmetadatajsonarray an NSString?
-+ (void)debugConnect:(NSString *)url applinkMetadataJsonArray:(NSString *)applinkData andCallback:(id)callback {
++ (void)debugConnect:(NSString *)url applinkMetadata:(NSString *)applinkData andCallback:(id)callback {
     NSError *error = nil;
     NSArray *appLinkMetadataArray = [NSJSONSerialization JSONObjectWithData:[applinkData dataUsingEncoding:NSUTF8StringEncoding]
                                                                     options:0
                                                                       error:&error];
-    AppLaunchConfig *appLaunchConfig = [AppLaunchConfig initialize:appLinkMetadataArray withUrl:url];
-    [AppRouter handleAppRouting:appLaunchConfig withDelegate:callback];
+    RootsAppLaunchConfig *rootsAppLaunchConfig = [RootsAppLaunchConfig initialize:appLinkMetadataArray withUrl:url];
+    [RootsAppRouter handleAppRouting:rootsAppLaunchConfig withDelegate:callback];
 }
 
 - (void)onRootFinderFinished:(RootsFinder *)rootFinder {
-#error did you mean to comment this back in?
     if (roots && roots.rootsFinderArray && [roots.rootsFinderArray count]) {
         [roots.rootsFinderArray removeObject:rootFinder];
     }

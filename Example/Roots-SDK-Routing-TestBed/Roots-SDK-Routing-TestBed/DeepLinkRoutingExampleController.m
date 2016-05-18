@@ -15,7 +15,7 @@
     NSString *paramStr = @"";
     for(NSString *key in routingParams) {
         NSString *value = [routingParams objectForKey:key];
-        paramStr = [paramStr stringByAppendingFormat:@"%@ :%@ \n", key, value];
+        paramStr = [paramStr stringByAppendingFormat:@"%@ : %@\n", key, value];
     }
     _paramsTxt.text = paramStr;
 }

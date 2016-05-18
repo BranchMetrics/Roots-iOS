@@ -1,5 +1,5 @@
 PODS:
-  - Roots (0.1.0)
+  - Roots (0.1.1)
 
 DEPENDENCIES:
   - Roots (from `../../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../../
 
 SPEC CHECKSUMS:
-  Roots: 6370a09ec32b7d5e8fb9462c4a0fa48d3a48afc8
+  Roots: 57384eb73ff5f32b2eb0343ad4f3e377117cd120
 
 PODFILE CHECKSUM: fbcf1f3775278742161e81ae36c6fc8f027e3ea3
 

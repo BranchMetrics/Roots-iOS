@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "RoutingViewController.h"
-#import "DeepLinkRouter.h"
+#import "RootsDeepLinkRouter.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -20,15 +19,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // Configure controller for deeplinking
-    [DeepLinkRouter registerForRouting:@"DeepLinkRoutingExampleController" forAppLinkKey:@"al:ios:url" withValueFormat:@"myscheme://*/user/{User_ID}/{Name}"];
-    [DeepLinkRouter registerForRouting:@"DeepLinkRoutingExampleController" forAppLinkKey:@"al:web:url" withValueFormat:@"https://my_awesome_site.com/*/{user_id}"];
+    [RootsDeepLinkRouter registerForRouting:@"DeepLinkRoutingExampleController" forAppLinkKey:@"al:ios:url" withValueFormat:@"myscheme://*/user/{User_ID}/{Name}"];
+    [RootsDeepLinkRouter registerForRouting:@"DeepLinkRoutingExampleController" forAppLinkKey:@"al:web:url" withValueFormat:@"https://my_awesome_site.com/*/{user_id}"];
 
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    [DeepLinkRouter handleDeeplinkRouting:url];
+    [RootsDeepLinkRouter handleDeeplinkRouting:url];
     
     return YES;
 }

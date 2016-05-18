@@ -1,6 +1,6 @@
 //
 //  RootsFinder.m
-//  Pods
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/4/16.
 //
@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "RootsFinder.h"
-#import "URLContent.h"
-#import "AppLaunchConfig.h"
-#import "AppRouter.h"
+#import "RootsURLContent.h"
+#import "RootsAppLaunchConfig.h"
+#import "RootsAppRouter.h"
 
 @interface RootsFinder ()
 
@@ -70,10 +70,10 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     if ([self isValidURL:url]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             // Get the final redirected URL content
-            URLContent *urlContent = [self getUrlContent:url];
+            RootsURLContent *rootsUrlContent = [self getUrlContent:url];
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 // Extract the Applink content by JS injection
-                [self scrapeAppLinkContent:urlContent];
+                [self scrapeAppLinkContent:rootsUrlContent];
             });
         });
     }
@@ -84,10 +84,10 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     }
 }
 
-- (URLContent *)getUrlContent:(NSString *)url {
+- (RootsURLContent *)getUrlContent:(NSString *)url {
     _actualUri = url;
     NSString *redirectedUrl = url;
-    URLContent *urlContent = [[URLContent alloc] init];
+    RootsURLContent *rootsUrlContent = [[RootsURLContent alloc] init];
     NSURLResponse *response = nil;
     NSData *contentData = nil;
     
@@ -112,23 +112,23 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
         redirectedUrl = nil;
     }
     
-    urlContent.htmlSource = contentData;
+    rootsUrlContent.htmlSource = contentData;
     if (response) {
-        urlContent.contentType = response.MIMEType;
-        urlContent.contentEncoding = response.textEncodingName;
+        rootsUrlContent.contentType = response.MIMEType;
+        rootsUrlContent.contentEncoding = response.textEncodingName;
     }
-    return urlContent;
+    return rootsUrlContent;
 }
 
 
-- (void)scrapeAppLinkContent:(URLContent *)urlContent {
+- (void)scrapeAppLinkContent:(RootsURLContent *)rootsUrlContent {
     UIWindow *window = [UIApplication sharedApplication].windows.firstObject;
     [window addSubview:self.webView];
     _webView.delegate = self;
     _webView.hidden = YES;
-    [_webView loadData:urlContent.htmlSource
-              MIMEType:urlContent.contentType
-      textEncodingName:urlContent.contentEncoding
+    [_webView loadData:rootsUrlContent.htmlSource
+              MIMEType:rootsUrlContent.contentType
+      textEncodingName:rootsUrlContent.contentEncoding
                baseURL:[NSURL URLWithString:@""]];
 }
 
@@ -138,20 +138,20 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
 
 
 - (void)extractAppLaunchConfigUsingJavaScript:(UIWebView *)webView {
-    AppLaunchConfig *appLaunchConfig = [[AppLaunchConfig alloc]init];
-    appLaunchConfig.actualUri = _actualUri;
-    appLaunchConfig.targetAppFallbackUrl = _actualUri;
+    RootsAppLaunchConfig *rootsAppLaunchConfig = [[RootsAppLaunchConfig alloc]init];
+    rootsAppLaunchConfig.actualUri = _actualUri;
+    rootsAppLaunchConfig.targetAppFallbackUrl = _actualUri;
     
     NSString *jsonString = [webView stringByEvaluatingJavaScriptFromString:METADATA_READ_JAVASCRIPT];
     NSError *error = nil;
     NSArray *appLinkMetadataArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]
                                                                     options:0
                                                                       error:&error];
-    appLaunchConfig = [AppLaunchConfig initialize:appLinkMetadataArray withUrl:_actualUri];
+    rootsAppLaunchConfig = [RootsAppLaunchConfig initialize:appLinkMetadataArray withUrl:_actualUri];
     if ([_options isUserOverridingFallbackRule]) {
-        appLaunchConfig.alwaysOpenAppStore =  [_options getAlwaysFallbackToAppStore];
+        rootsAppLaunchConfig.alwaysOpenAppStore =  [_options getAlwaysFallbackToAppStore];
     }
-    [AppRouter handleAppRouting:appLaunchConfig withDelegate:_rootsEventCallback];
+    [RootsAppRouter handleAppRouting:rootsAppLaunchConfig withDelegate:_rootsEventCallback];
     
     if (_rootFinderStateCallback) {
         [ _rootFinderStateCallback onRootFinderFinished:self];

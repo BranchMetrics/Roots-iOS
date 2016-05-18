@@ -1,6 +1,6 @@
 //
 //  RootsViewController.m
-//  Roots-iOS-SDK
+//  Roots-SDK-TestBed
 //
 //  Created by sojan on 05/02/2016.
 //  Copyright (c) 2016 sojan. All rights reserved.
@@ -8,12 +8,8 @@
 
 #import "RootsViewController.h"
 #import "Roots.h"
-#import "DeepLinkRouter.h"
+#import "RootsDeepLinkRouter.h"
 
-
-@interface RootsViewController ()
-
-@end
 
 @implementation RootsViewController
 
@@ -27,7 +23,7 @@
         NSString *debugAppLinkMetadataJson = @"[{\"property\":\"al:ios:app_name\",\"content\":\"RootsTestBed\"},{\"property\":\"al:ios:app_store_id\",\"content\":\"336353151\"},{\"property\":\"al:ios:url\",\"content\":\"myscheme://mypath/user/my_user_id1234/my_username\"},{\"property\":\"al:web:should_fallback\",\"content\":\"false\"}]";
         
         [Roots debugConnect:@"https://my_awesome_site.com/user/my_user_id123456"
-                applinkMetadataJsonArray:debugAppLinkMetadataJson
+                applinkMetadata:debugAppLinkMetadataJson
                 andCallback:self];
     }
 }

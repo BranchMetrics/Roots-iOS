@@ -1,6 +1,6 @@
 //
 //  Roots.h
-//  Pods
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/3/16.
 //
@@ -47,6 +47,6 @@ enum RootsError {
 /**
  * Method to debug the app link routing with given app link data
  */
-+ (void)debugConnect:(NSString *)url applinkMetadataJsonArray:(NSString *)applinkData andCallback:(id)callback;
++ (void)debugConnect:(NSString *)url applinkMetadata:(NSString *)applinkData andCallback:(id)callback;
 
 @end
