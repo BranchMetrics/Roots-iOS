@@ -153,8 +153,11 @@ static NSString *const METADATA_READ_JAVASCRIPT = @""
     }
     [RootsAppRouter handleAppRouting:rootsAppLaunchConfig withDelegate:_rootsEventCallback];
     
+    [_webView setDelegate:nil];
+    [_webView stopLoading];
+    
     if (_rootFinderStateCallback) {
-        [ _rootFinderStateCallback onRootFinderFinished:self];
+        [_rootFinderStateCallback onRootFinderFinished:self];
     }
 }
 
