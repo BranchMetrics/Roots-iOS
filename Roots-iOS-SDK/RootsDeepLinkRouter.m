@@ -113,8 +113,7 @@ static RootsDeepLinkRouter *rootsDeepLinkRouter;
 - (void)launchViewController:(NSString *) viewControllerName withParamsDict:(NSDictionary *)paramDict {
     UIViewController *deepLinkPresentingController = [[[UIApplication sharedApplication].delegate window] rootViewController];
     
-    Class targetUIViewController = NSClassFromString(viewControllerName);
-    targetUIViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:viewControllerName];
+    UIViewController *targetUIViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:viewControllerName];
     
     // Launch the controller
     [deepLinkPresentingController presentViewController:targetUIViewController animated:YES completion:NULL];
