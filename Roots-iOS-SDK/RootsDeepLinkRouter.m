@@ -140,7 +140,6 @@ static RootsDeepLinkRouter *rootsDeepLinkRouter;
     
     if ([paramCheckingResult numberOfRanges] > 1 ) {
         for (int i = 1; i < [paramCheckingResult numberOfRanges]; i++) {
-            NSLog(@"Captured a param %@", [urlFormat substringWithRange: [paramCheckingResult rangeAtIndex:i]]);
             if ( i < [valueCheckingResult numberOfRanges]) {
                 [paramValDict setObject:[url substringWithRange: [valueCheckingResult rangeAtIndex:i]] forKey:[urlFormat substringWithRange: [paramCheckingResult rangeAtIndex:i]]];
             }

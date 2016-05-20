@@ -13,7 +13,7 @@
 
 @interface Roots() <RootFinderStateDelegate>
 /**
- * Root finder instance for finding and following app roots for the given url.
+ * Roots finder instance for finding and following app roots for the given url.
  */
 @property (nonatomic, strong) RootsFinder *rootsFinder;
 @property (nonatomic, strong) NSMutableArray *rootsFinderArray;

@@ -34,13 +34,13 @@ enum RootsError {
 @interface Roots : NSObject
 
 /**
- * Method route to matchong app for the given url. Routing results are provided through the delegate
+ * Method route to corresponding app for the given url. Routing outcome is provided through the delegate
  */
 + (void)connect:(NSString *)url withDelegate:(id)callback;
 
 /**
- * Method route to matchong app for the given url. Routing results are provided through the delegate.
- * Method provides  option to set routing prefrence by passing RootsLinkOptions
+ * Method route to corresponding app for the given url. Routing results are provided through the delegate.
+ * Method provides an option to set routing preference by passing RootsLinkOptions
  */
 + (void)connect:(NSString *)url withDelegate:(id)callback andWithOptions:(RootsLinkOptions *)options;
 
