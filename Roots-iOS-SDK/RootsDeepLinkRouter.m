@@ -46,9 +46,6 @@ static RootsDeepLinkRouter *rootsDeepLinkRouter;
     [alTypeDictionary setObject:controllerId forKey:valueFormat];
 }
 
-
-
-
 - (NSString *)getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
     NSString *matchedUIViewControllerName = nil;
     NSString *matchedURLFormat;
@@ -84,11 +81,21 @@ static RootsDeepLinkRouter *rootsDeepLinkRouter;
     return isMatch;
 }
 
-+ (void)handleDeeplinkRouting:(NSURL *)url {
-    NSString *urlStr = [url absoluteString];
++ (void)openUrl:(NSURL *)url {
+    [self routeToAppropriateViewController:[url absoluteString]];
+}
+
++ (void)continueUserActivity:(NSUserActivity *)userActivity {
+    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        [self routeToAppropriateViewController:[userActivity.webpageURL absoluteString]];
+    }
+}
+
++ (void)routeToAppropriateViewController:(NSString *)urlStr {
     RootsDeepLinkRouter *rootsDeepLinkRouter = [RootsDeepLinkRouter getInstance];
-    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc]init];
-    // First look for an ios url Strong match
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    
+    // First look for an ios url strong match
     NSString *strongMatchControllerName = [rootsDeepLinkRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
     if (strongMatchControllerName) {
         [rootsDeepLinkRouter launchViewController:strongMatchControllerName withParamsDict:paramsDict];
@@ -100,6 +107,7 @@ static RootsDeepLinkRouter *rootsDeepLinkRouter;
             [rootsDeepLinkRouter launchViewController:weakMatchControllerName withParamsDict:paramsDict];
         }
     }
+
 }
 
 - (void)launchViewController:(NSString *) viewControllerName withParamsDict:(NSDictionary *)paramDict {

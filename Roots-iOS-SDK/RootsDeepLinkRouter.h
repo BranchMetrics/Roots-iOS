@@ -10,6 +10,7 @@
 @interface RootsDeepLinkRouter : NSObject
 
 + (void)registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat;
-+ (void)handleDeeplinkRouting:(NSURL *)url;
++ (void)openUrl:(NSURL *)url;
++ (void)continueUserActivity:(NSUserActivity *)userActivity;
 
 @end

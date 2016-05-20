@@ -27,14 +27,14 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    [RootsDeepLinkRouter handleDeeplinkRouting:url];
+    [RootsDeepLinkRouter openUrl:url];
     
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
     
-    // V2 will need to add support for Universal Links
+    [RootsDeepLinkRouter continueUserActivity:userActivity];
     
     return YES;
 }

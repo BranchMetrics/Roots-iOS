@@ -69,7 +69,7 @@ Also, the router must receive the deep link path in `openURL`.
 
 ```Objc
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    [RootsDeepLinkRouter handleDeeplinkRouting:url];
+    [RootsDeepLinkRouter openUrl:url];
     return YES;
 }
 ```
@@ -78,7 +78,7 @@ And the router must receive the path of the universal link in `continueUserActiv
 
 ```Objc
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler {
-    // TODO
+    [RootsDeepLinkRouter continueUserActivity:userActivity];
     return YES;
 }
 ```
