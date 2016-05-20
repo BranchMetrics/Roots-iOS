@@ -1,11 +1,11 @@
 //
 //  RootsFinder.h
-//  Pods
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/4/16.
 //
 //
-#import "AppLaunchConfig.h"
+#import "RootsAppLaunchConfig.h"
 #import "Roots.h"
 #import "RootsLinkOptions.h"
 
@@ -13,15 +13,15 @@
 @interface RootsFinder : NSObject <UIWebViewDelegate>
 
 /**
- * Captures the appLaunchConfiguration for url specified and routes according to the launch config
+ * Captures the RootsAppLaunchConfig for url specified and routes according to the launch config
  */
-- (void) findAndFollowRoots:(NSString *)url withDelegate:(id)callback withStateDelegate:(id)stateCallback andOptions:(RootsLinkOptions *)options;
+- (void)findAndFollowRoots:(NSString *)url withDelegate:(id)callback withStateDelegate:(id)stateCallback andOptions:(RootsLinkOptions *)options;
 
 @end
 
 
 @protocol RootFinderStateDelegate <NSObject>
 
-- (void) onRootFinderFinished:(RootsFinder *)rootFinder;
+- (void)onRootFinderFinished:(RootsFinder *)rootFinder;
 
 @end

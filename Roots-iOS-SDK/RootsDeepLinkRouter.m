@@ -1,30 +1,30 @@
 //
-//  DeepLinkRouter.m
-//  Pods
+//  RootsDeepLinkRouter.m
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/12/16.
 //
 //
 
 #import <Foundation/Foundation.h>
-#import "DeepLinkRouter.h"
+#import "RootsDeepLinkRouter.h"
 #import "Roots.h"
 
-@interface DeepLinkRouter ()
+@interface RootsDeepLinkRouter ()
 
 @property (nonatomic, strong) NSMutableDictionary *deepLinkRoutingMap;
 
 @end
 
-@implementation DeepLinkRouter
+@implementation RootsDeepLinkRouter
 
-static DeepLinkRouter *deepLinkRouter;
+static RootsDeepLinkRouter *rootsDeepLinkRouter;
 
-+ (DeepLinkRouter *) getInstance {
-    if(!deepLinkRouter) {
-        deepLinkRouter = [[DeepLinkRouter alloc]init];
++ (RootsDeepLinkRouter *)getInstance {
+    if(!rootsDeepLinkRouter) {
+        rootsDeepLinkRouter = [[RootsDeepLinkRouter alloc]init];
     }
-    return deepLinkRouter;
+    return rootsDeepLinkRouter;
 }
 
 - (instancetype)init {
@@ -35,27 +35,24 @@ static DeepLinkRouter *deepLinkRouter;
     return self;
 }
 
-+ (void) registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
-    DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
-    NSMutableDictionary *alTypeDictionary = [deepLinRouter.deepLinkRoutingMap objectForKey:alKey];
++ (void)registerForRouting:(NSString *) controllerId forAppLinkKey:(NSString *) alKey withValueFormat:(NSString *) valueFormat {
+    RootsDeepLinkRouter *rootsDeepLinRouter = [RootsDeepLinkRouter getInstance];
+    NSMutableDictionary *alTypeDictionary = [rootsDeepLinRouter.deepLinkRoutingMap objectForKey:alKey];
     if( !alTypeDictionary) {
         alTypeDictionary = [[NSMutableDictionary alloc] init];
-        [deepLinRouter.deepLinkRoutingMap setObject:alTypeDictionary forKey:alKey];
+        [rootsDeepLinRouter.deepLinkRoutingMap setObject:alTypeDictionary forKey:alKey];
     }
     
     [alTypeDictionary setObject:controllerId forKey:valueFormat];
 }
 
-
-
-
-- (NSString *) getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
+- (NSString *)getMatchingViewControllerForUrl:(NSString *) url andALtype:(NSString *) alKey withParamDict:(NSMutableDictionary **) paramDict {
     NSString *matchedUIViewControllerName = nil;
     NSString *matchedURLFormat;
     NSMutableDictionary *alTypeDictionary = [self.deepLinkRoutingMap objectForKey:alKey];
     if (alTypeDictionary) {
         for (NSString * key in alTypeDictionary){
-            if ( [self CheckForMatch:url format:key]){
+            if ( [self checkForMatch:url format:key]){
                 matchedUIViewControllerName = [alTypeDictionary objectForKey:key];
                 matchedURLFormat = key;
                 break;
@@ -68,7 +65,7 @@ static DeepLinkRouter *deepLinkRouter;
     return matchedUIViewControllerName;
 }
 
-- (BOOL) CheckForMatch:(NSString *)url format:(NSString *) urlFormat {
+- (BOOL)checkForMatch:(NSString *)url format:(NSString *) urlFormat {
     BOOL isMatch = NO;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\{[^}]*\\})" options:0 error:nil];
     NSString *valueExpressionStr = [regex stringByReplacingMatchesInString:urlFormat options:0 range:NSMakeRange(0, [urlFormat length]) withTemplate:@"(.+)"];
@@ -84,25 +81,36 @@ static DeepLinkRouter *deepLinkRouter;
     return isMatch;
 }
 
-+ (void) handleDeeplinkRouting:(NSURL *)url {
-    NSString *urlStr = [url absoluteString];
-    DeepLinkRouter *deepLinRouter = [DeepLinkRouter getInstance];
-    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc]init];
-    // First look for an ios url Strong match
-    NSString *strongMatchControllerName = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
-    if (strongMatchControllerName) {
-        [deepLinRouter launchViewController:strongMatchControllerName withParamsDict:paramsDict];
-    }
-    // if a strong ios url match not found check for a  web url match
-    else {
-        NSString *weakMatchControllerName = [deepLinRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url" withParamDict:&paramsDict];
-        if (weakMatchControllerName) {
-            [deepLinRouter launchViewController:weakMatchControllerName withParamsDict:paramsDict];
-        }
++ (void)openUrl:(NSURL *)url {
+    [self routeToAppropriateViewController:[url absoluteString]];
+}
+
++ (void)continueUserActivity:(NSUserActivity *)userActivity {
+    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        [self routeToAppropriateViewController:[userActivity.webpageURL absoluteString]];
     }
 }
 
-- (void) launchViewController:(NSString *) viewControllerName withParamsDict:(NSDictionary *)paramDict {
++ (void)routeToAppropriateViewController:(NSString *)urlStr {
+    RootsDeepLinkRouter *rootsDeepLinkRouter = [RootsDeepLinkRouter getInstance];
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    
+    // First look for an ios url strong match
+    NSString *strongMatchControllerName = [rootsDeepLinkRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:ios:url" withParamDict:&paramsDict];
+    if (strongMatchControllerName) {
+        [rootsDeepLinkRouter launchViewController:strongMatchControllerName withParamsDict:paramsDict];
+    }
+    // if a strong ios url match not found check for a  web url match
+    else {
+        NSString *weakMatchControllerName = [rootsDeepLinkRouter getMatchingViewControllerForUrl:urlStr andALtype:@"al:web:url" withParamDict:&paramsDict];
+        if (weakMatchControllerName) {
+            [rootsDeepLinkRouter launchViewController:weakMatchControllerName withParamsDict:paramsDict];
+        }
+    }
+
+}
+
+- (void)launchViewController:(NSString *) viewControllerName withParamsDict:(NSDictionary *)paramDict {
     UIViewController *deepLinkPresentingController = [[[UIApplication sharedApplication].delegate window] rootViewController];
     
     Class targetUIViewController = NSClassFromString(viewControllerName);
@@ -113,14 +121,13 @@ static DeepLinkRouter *deepLinkRouter;
     
     // Pass the roting params if controller is interested
     if ([targetUIViewController conformsToProtocol:@protocol(RootsRoutingDelegate)]) {
-        NSLog(@"conffimes");
         UIViewController <RootsRoutingDelegate> *rootsRoutingDelegateInstance = (UIViewController <RootsRoutingDelegate> *) targetUIViewController;
         [rootsRoutingDelegateInstance configureControlWithRoutingData:paramDict];
     }
     
 }
 
-- (NSMutableDictionary *) getParamValueMap:(NSString *)url withFormat:(NSString *) urlFormat {
+- (NSMutableDictionary *)getParamValueMap:(NSString *)url withFormat:(NSString *) urlFormat {
     NSMutableDictionary * paramValDict = [[NSMutableDictionary alloc] init];
     
     NSRegularExpression *valueRegex = [NSRegularExpression regularExpressionWithPattern:@"(\\{[^}]*\\})" options:0 error:nil];
@@ -141,7 +148,6 @@ static DeepLinkRouter *deepLinkRouter;
     
     if ([paramCheckingResult numberOfRanges] > 1 ) {
         for (int i = 1; i < [paramCheckingResult numberOfRanges]; i++) {
-            NSLog(@"Captured a param %@", [urlFormat substringWithRange: [paramCheckingResult rangeAtIndex:i]]);
             if ( i < [valueCheckingResult numberOfRanges]) {
                 [paramValDict setObject:[url substringWithRange: [valueCheckingResult rangeAtIndex:i]] forKey:[urlFormat substringWithRange: [paramCheckingResult rangeAtIndex:i]]];
             }

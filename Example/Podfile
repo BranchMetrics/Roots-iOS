@@ -1,11 +1,5 @@
 use_frameworks!
 
 target 'Roots-iOS-SDK_Example' do
-  pod 'Roots-iOS-SDK', :path => '../'
-end
-
-target 'Roots-iOS-SDK_Tests' do
-  pod 'Roots-iOS-SDK', :path => '../'
-
-  
+  pod 'Roots', :path => '../'
 end

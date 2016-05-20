@@ -1,14 +1,16 @@
 PODS:
-  - Roots-iOS-SDK (0.1.0)
+  - Roots (0.1.1)
 
 DEPENDENCIES:
-  - Roots-iOS-SDK (from `../`)
+  - Roots (from `../`)
 
 EXTERNAL SOURCES:
-  Roots-iOS-SDK:
+  Roots:
     :path: ../
 
 SPEC CHECKSUMS:
-  Roots-iOS-SDK: 6ab3aa9f4715b36a0fe6fb281b8405a7787133d9
+  Roots: 57384eb73ff5f32b2eb0343ad4f3e377117cd120
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 3b15afd1f96142363c105e228905a20475db2e10
+
+COCOAPODS: 1.0.0

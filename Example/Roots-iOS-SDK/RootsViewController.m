@@ -1,6 +1,6 @@
 //
 //  RootsViewController.m
-//  Roots-iOS-SDK
+//  Roots-SDK-TestBed
 //
 //  Created by sojan on 05/02/2016.
 //  Copyright (c) 2016 sojan. All rights reserved.
@@ -8,26 +8,11 @@
 
 #import "RootsViewController.h"
 #import "Roots.h"
-#import "DeepLinkRouter.h"
+#import "RootsDeepLinkRouter.h"
 
-
-@interface RootsViewController ()
-
-@end
 
 @implementation RootsViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    
-}
 - (IBAction)navigateBtn:(id)sender {
     if (_navUrlTxt.text && _navUrlTxt.text.length > 0) {
         RootsLinkOptions *options = [[RootsLinkOptions alloc] init];
@@ -36,30 +21,31 @@
     }
     else {
         NSString *debugAppLinkMetadataJson = @"[{\"property\":\"al:ios:app_name\",\"content\":\"RootsTestBed\"},{\"property\":\"al:ios:app_store_id\",\"content\":\"336353151\"},{\"property\":\"al:ios:url\",\"content\":\"myscheme://mypath/user/my_user_id1234/my_username\"},{\"property\":\"al:web:should_fallback\",\"content\":\"false\"}]";
+        
         [Roots debugConnect:@"https://my_awesome_site.com/user/my_user_id123456"
-                applinkMetadataJsonArray:debugAppLinkMetadataJson
+                applinkMetadata:debugAppLinkMetadataJson
                 andCallback:self];
     }
 }
 
 - (void)applicationLaunched:(NSString *)appName appStoreID:(NSString *)appStoreID {
-    NSLog(@"Roots_AppLinker: applicationLaunched %@  %@", appName, appStoreID);
+    NSLog(@"Roots App Linker: applicationLaunched %@  %@", appName, appStoreID);
 }
 
 - (void)fallbackUrlOpened:(NSString *)fallbackUrl {
-    NSLog(@"Roots_AppLinker: fallbackUrlOpened %@", fallbackUrl);
+    NSLog(@"Roots App Linker: fallbackUrlOpened %@", fallbackUrl);
 }
 
 - (void)appStoreOpened:(NSString *)appName appStoreID:(NSString *)appStoreID {
-    NSLog(@"Roots_AppLinker: appStoreOpened %@  %@", appName, appStoreID);
+    NSLog(@"Roots App Linker: appStoreOpened %@  %@", appName, appStoreID);
 }
 
 - (void) rootsError:(enum RootsError)error {
     if (error == invalid_url) {
-        NSLog(@"Roots_AppLinker: rootsError invalid url");
+        NSLog(@"Roots App Linker: rootsError invalid url");
     }
     else {
-        NSLog(@"Roots_AppLinker: rootsError %d", error);
+        NSLog(@"Roots App Linker: rootsError %d", error);
     }
 }
 

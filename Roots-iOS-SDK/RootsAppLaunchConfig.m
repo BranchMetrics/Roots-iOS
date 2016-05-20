@@ -1,15 +1,15 @@
 //
-//  AppLaunchConfig.m
-//  Pods
+//  RootsAppLaunchConfig.m
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/4/16.
 //
 //
 
 #import <Foundation/Foundation.h>
-#import "AppLaunchConfig.h"
+#import "RootsAppLaunchConfig.h"
 
-@implementation AppLaunchConfig
+@implementation RootsAppLaunchConfig
 
 //--- Keys for FB app link properties ---------//
 NSString * const PROPERTY_KEY = @"property";
@@ -21,42 +21,42 @@ NSString * const PROPERTY_WEB_URL_KEY = @"al:web:url";
 NSString * const PROPERTY_ALWAYS_WEB_FALLBACK_KEY = @"al:web:should_fallback";
 NSInteger const PORT_UNDEFINED = -1;
 
-+ (AppLaunchConfig *) initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url {
-    AppLaunchConfig *appLaunchConfig = [[AppLaunchConfig alloc] init];
-    appLaunchConfig.actualUri = url;
-    appLaunchConfig.targetAppFallbackUrl = url;
++ (RootsAppLaunchConfig *)initialize:(NSArray *)applinkMetadataArray withUrl:(NSString *)url {
+    RootsAppLaunchConfig *rootsAppLaunchConfig = [[RootsAppLaunchConfig alloc] init];
+    rootsAppLaunchConfig.actualUri = url;
+    rootsAppLaunchConfig.targetAppFallbackUrl = url;
     
     for (NSDictionary *tag in applinkMetadataArray) {
         NSString *name = tag[PROPERTY_KEY];
         NSString *value = tag[CONTENT_KEY];
         
         if ([name isEqualToString:PROPERTY_APP_NAME_KEY]) {
-            appLaunchConfig.targetAppName = value;
+            rootsAppLaunchConfig.targetAppName = value;
         }
         else if ([name isEqualToString:PROPERTY_APPSTORE_ID_KEY]) {
-            appLaunchConfig.targetAppStoreID = value;
+            rootsAppLaunchConfig.targetAppStoreID = value;
         }
         else if ([name isEqualToString:PROPERTY_WEB_URL_KEY]) {
-            appLaunchConfig.targetAppFallbackUrl = value;
+            rootsAppLaunchConfig.targetAppFallbackUrl = value;
         }
         else if ([name isEqualToString:PROPERTY_ALWAYS_WEB_FALLBACK_KEY]) {
-            appLaunchConfig.alwaysOpenAppStore = [value boolValue];
+            rootsAppLaunchConfig.alwaysOpenAppStore = [value boolValue];
         }
         else if ([name isEqualToString:PROPERTY_IOS_URL_KEY]) {
             NSURLComponents * targetUrl = [NSURLComponents componentsWithString:value];
             if (targetUrl) {
-                appLaunchConfig.targetAppLaunchScheme = targetUrl.scheme;
-                appLaunchConfig.targetAppLaunchHost = targetUrl.host;
-                appLaunchConfig.targetAppLaunchPath = targetUrl.path;
-                appLaunchConfig.targetAppLaunchPort = [targetUrl.port integerValue];
-                appLaunchConfig.targetAppLaunchParams = targetUrl.query;
+                rootsAppLaunchConfig.targetAppLaunchScheme = targetUrl.scheme;
+                rootsAppLaunchConfig.targetAppLaunchHost = targetUrl.host;
+                rootsAppLaunchConfig.targetAppLaunchPath = targetUrl.path;
+                rootsAppLaunchConfig.targetAppLaunchPort = [targetUrl.port integerValue];
+                rootsAppLaunchConfig.targetAppLaunchParams = targetUrl.query;
             }
         }
     }
-    return appLaunchConfig;
+    return rootsAppLaunchConfig;
 }
 
-- (BOOL) isLaunchSchemeAvailable {
+- (BOOL)isLaunchSchemeAvailable {
     return !([self.targetAppLaunchScheme isKindOfClass: [NSNull class]] || self.targetAppLaunchScheme.length == 0);
 }
 

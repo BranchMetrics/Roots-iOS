@@ -1,6 +1,6 @@
 //
 //  RootsLinkOptions.m
-//  Pods
+//  Roots-SDK
 //
 //  Created by Sojan P.R. on 5/10/16.
 //
@@ -19,24 +19,24 @@
 
 @implementation RootsLinkOptions
 
-- (void) setUserAgent:(NSString *)userAgent {
+- (void)setUserAgent:(NSString *)userAgent {
     _userAgent = userAgent;
 }
 
-- (void) setAlwaysFallbackToAppStore:(BOOL)alwaysFallbackToAppStore {
+- (void)setAlwaysFallbackToAppStore:(BOOL)alwaysFallbackToAppStore {
     _alwaysFallbackToAppStore = alwaysFallbackToAppStore;
     _isUserOverridingFallbackRule = YES;
 }
 
-- (NSString *) getUserAgent {
+- (NSString *)getUserAgent {
     return _userAgent;
 }
 
-- (BOOL) getAlwaysFallbackToAppStore {
+- (BOOL)getAlwaysFallbackToAppStore {
     return _alwaysFallbackToAppStore;
 }
 
-- (BOOL) isUserOverridingFallbackRule {
+- (BOOL)isUserOverridingFallbackRule {
     return _isUserOverridingFallbackRule;
 }
 

@@ -17,9 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Demo Applicaiton for Roots SDK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="601" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-vg-hNj">
-                                <rect key="frame" x="0.0" y="167" width="349" height="256"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home Page - Non Deep Linked Example" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="601" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-vg-hNj">
+                                <rect key="frame" x="126" y="172" width="349" height="256"/>
                                 <color key="backgroundColor" red="0.96813693782255728" green="1" blue="0.9936319147604582" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="chi-Ma-Ehd"/>
+                                    <constraint firstAttribute="width" constant="349" id="t2h-p3-1uf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -27,6 +31,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <rect key="contentStretch" x="0.050000000000000003" y="0.0" width="0.0" height="0.0"/>
+                        <constraints>
+                            <constraint firstItem="w1E-vg-hNj" firstAttribute="centerX" secondItem="HF6-hF-vQ4" secondAttribute="centerX" id="Kki-Yi-roK"/>
+                            <constraint firstItem="w1E-vg-hNj" firstAttribute="centerY" secondItem="HF6-hF-vQ4" secondAttribute="centerY" id="mkR-Q4-AF7"/>
+                        </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
@@ -47,24 +55,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DeepLink Routed View Controller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqo-8p-8In">
-                                <rect key="frame" x="0.0" y="99" width="403" height="293"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deep Linked View Controller" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqo-8p-8In">
+                                <rect key="frame" x="99" y="153" width="403" height="293"/>
                                 <color key="backgroundColor" red="0.94319734570448677" green="1" blue="0.98336696935994616" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="293" id="AI6-Vy-j1y"/>
+                                    <constraint firstAttribute="width" constant="403" id="KtQ-ad-V9X"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRH-gN-aef">
-                                <rect key="frame" x="83" y="289" width="236" height="96"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRH-gN-aef">
+                                <rect key="frame" x="99" y="356" width="397" height="67"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eqo-8p-8In" firstAttribute="centerX" secondItem="KbS-Es-qGZ" secondAttribute="centerX" id="6S3-Hw-8kU"/>
+                            <constraint firstItem="eqo-8p-8In" firstAttribute="centerY" secondItem="KbS-Es-qGZ" secondAttribute="centerY" id="sba-Hi-f0U"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="paramsTxt" destination="kRH-gN-aef" id="L3e-S4-mGB"/>
+                        <outlet property="paramsTxt" destination="kRH-gN-aef" id="ZNL-WZ-xDx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7tV-R4-2SW" userLabel="First Responder" sceneMemberID="firstResponder"/>
